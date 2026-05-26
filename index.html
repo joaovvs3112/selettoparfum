@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seletto Parfum. Fragrâncias Árabes Originais</title>
+<meta name="description" content="Clube restrito de fragrâncias árabes originais. Lotes validados, atendimento privado, preços exclusivos.">
+<meta name="theme-color" content="#0A0A0A">
+<meta property="og:title" content="Seletto Parfum. Acesso Exclusivo">
+<meta property="og:description" content="Fragrâncias árabes originais. Sem marketplace. Sem intermediário.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--preto:#0A0A0A;
+--ouro:#C5A059;
+--offwhite:#F0EFEA;
+--ouro-soft:rgba(197,160,89,0.12);
+--ouro-glow:rgba(197,160,89,0.25);
+--erro:#5C2020;
+--cinza-apagado:rgba(240,239,234,0.3);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+background:var(--preto);
+color:var(--offwhite);
+font-family:'Inter','Helvetica Neue',Arial,sans-serif;
+font-weight:400;
+line-height:1.7;
+overflow-x:hidden;
+padding-top:40px;
+}
+
+/* ===== BARRA DE URGENCIA ===== */
+.urgency-bar{
+position:fixed;top:0;left:0;right:0;
+height:40px;
+background:var(--ouro);
+display:flex;align-items:center;justify-content:center;
+z-index:1000;
+text-decoration:none;
+}
+.urgency-bar span{
+color:var(--preto);font-weight:700;font-size:11px;
+text-transform:uppercase;letter-spacing:2px;
+}
+
+/* ===== CTA FLUTUANTE MOBILE ===== */
+.floating-cta{
+display:none;
+position:fixed;bottom:0;left:0;right:0;
+z-index:999;padding:0 16px 16px;
+}
+.floating-cta a{
+display:block;width:100%;height:52px;
+background:var(--ouro);color:var(--preto);
+font-weight:700;font-size:13px;text-transform:uppercase;
+letter-spacing:3px;text-decoration:none;text-align:center;
+line-height:52px;border-radius:0;
+}
+@media(max-width:768px){
+.floating-cta.active{display:block}
+.floating-cta.hidden{display:none}
+}
+
+/* ===== CONTAINER ===== */
+.container{max-width:1000px;margin:0 auto;padding:0 24px}
+section{padding:60px 0}
+
+/* ===== CORREÇÃO 1: LABELS ===== */
+.section-label{
+font-size:12px;font-weight:600;letter-spacing:3px;
+color:var(--ouro);text-transform:uppercase;margin-bottom:1.5rem;
+}
+
+/* ===== TITULOS ===== */
+h1,h2{font-weight:700;color:var(--ouro);text-transform:uppercase;letter-spacing:4px;line-height:1.3}
+h1{font-size:clamp(1.5rem,4vw,2.5rem);font-weight:800}
+h2{font-size:clamp(1.3rem,3.5vw,2rem)}
+
+/* ===== HOOKS (pill divider) ===== */
+.hook-wrap{
+display:flex;align-items:center;justify-content:center;
+padding:48px 24px;
+}
+.hook{
+display:inline-flex;align-items:center;gap:10px;
+padding:10px 24px;
+border:1px solid rgba(197,160,89,0.25);
+border-radius:999px;
+background:rgba(197,160,89,0.04);
+font-style:normal;font-weight:500;
+color:var(--offwhite);font-size:14px;
+letter-spacing:0.5px;
+}
+.hook::before{
+content:'';
+width:8px;height:8px;
+border-radius:50%;
+background:var(--ouro);
+flex-shrink:0;
+}
+
+/* ===== FADE ===== */
+.fade-up{opacity:0;transform:translateY(30px);transition:opacity .5s ease-out,transform .5s ease-out}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+/* ===== CTA BUTTONS ===== */
+.cta-block{text-align:center;padding:40px 0}
+.cta-micro{font-size:14px;font-weight:400;color:var(--offwhite);margin-bottom:16px}
+.cta-btn{
+display:inline-block;background:var(--ouro);color:var(--preto);
+font-family:'Inter',sans-serif;font-size:14px;font-weight:800;
+letter-spacing:3px;text-transform:uppercase;text-decoration:none;
+padding:18px 44px;border-radius:0;
+box-shadow:0 0 40px rgba(197,160,89,0.15);
+transition:background .3s ease,box-shadow .3s ease;
+}
+.cta-btn:hover{background:var(--offwhite);box-shadow:0 0 60px rgba(197,160,89,0.3)}
+.cta-sub{font-size:12px;font-weight:400;color:var(--cinza-apagado);margin-top:12px}
+
+/* ===== S1: HERO ===== */
+.hero{min-height:100vh;min-height:100dvh;display:flex;align-items:center;padding:40px 0}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr auto;gap:0 3rem;width:100%}
+.hero-text{grid-column:1;grid-row:1;display:flex;flex-direction:column;justify-content:center}
+.hero-visual{grid-column:2;grid-row:1/3}
+.hero-micro-cta{grid-column:1;grid-row:2;align-self:start;margin-top:20px;color:var(--ouro);text-decoration:none;font-size:15px;font-weight:500;transition:text-decoration .2s}
+.hero-micro-cta:hover{text-decoration:underline}
+.hero-logo{width:240px;margin-bottom:32px}
+.hero h1{margin-bottom:1.2rem}
+.hero-subtitle{font-weight:400;font-size:16px;color:var(--offwhite);line-height:1.7;max-width:440px}
+.hero-placeholder{
+width:100%;height:100%;background:rgba(197,160,89,0.06);border:1px solid rgba(197,160,89,0.15);
+display:flex;align-items:center;justify-content:center;
+}
+.hero-placeholder span{font-size:10px;color:var(--cinza-apagado);text-transform:uppercase;letter-spacing:2px;text-align:center;padding:0 12px}
+
+/* ===== S2: COMPARATIVO COM VS ===== */
+.comparativo{padding:60px 0}
+.comparativo-header{text-align:center;margin-bottom:2.5rem}
+.comparativo-wrapper{
+display:flex;align-items:stretch;gap:0;position:relative;
+}
+.comp-col{flex:1;padding:2rem;position:relative}
+.comp-col--mk{
+background:rgba(92,32,32,0.10);
+border:1px solid rgba(92,32,32,0.25);
+}
+.comp-col--sel{
+background:rgba(197,160,89,0.10);
+border:1px solid rgba(197,160,89,0.35);
+box-shadow:0 0 30px rgba(197,160,89,0.06);
+}
+.comp-title{
+font-size:14px;font-weight:700;text-transform:uppercase;
+letter-spacing:2px;margin-bottom:1.5rem;padding-bottom:.75rem;
+border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.comp-col--mk .comp-title{color:rgba(240,239,234,0.35)}
+.comp-col--sel .comp-title{color:var(--ouro)}
+.comp-item{
+font-size:14px;font-weight:400;line-height:1.7;margin-bottom:.75rem;
+display:flex;align-items:flex-start;gap:.6rem;
+}
+.comp-col--mk .comp-item{color:var(--cinza-apagado)}
+.comp-col--mk .comp-icon{color:#8B3A3A;font-weight:700;flex-shrink:0}
+.comp-col--sel .comp-item{color:var(--offwhite)}
+.comp-col--sel .comp-icon{color:var(--ouro);font-weight:700;flex-shrink:0}
+.comp-vs{
+position:absolute;top:50%;left:50%;
+transform:translate(-50%,-50%);
+width:56px;height:56px;border-radius:50%;
+background:var(--ouro);
+display:flex;align-items:center;justify-content:center;
+font-size:16px;font-weight:800;color:var(--preto);
+box-shadow:0 0 20px rgba(197,160,89,0.3);
+z-index:10;
+}
+.comp-footer{
+text-align:center;margin-top:2rem;
+font-style:italic;font-weight:500;color:var(--ouro);font-size:18px;
+}
+
+/* ===== S3: PROBLEMA ===== */
+.problema{background:rgba(92,32,32,0.08)}
+.problema-grid{display:flex;gap:2.5rem;align-items:center}
+.problema-text{flex:1;border-left:3px solid var(--ouro);padding-left:24px}
+.problema-text h2{margin-bottom:1rem}
+.problema-corpo{font-weight:400;font-size:15px;line-height:1.8;margin-bottom:1rem}
+.problema-ruptura{font-weight:600;color:var(--offwhite);font-size:16px}
+.problema-visual{flex:0 0 40%}
+.problema-placeholder{
+width:100%;overflow:hidden;border:1px solid rgba(197,160,89,0.2);
+}
+.problema-placeholder img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* ===== S4: COMO FUNCIONA ===== */
+.como-funciona{padding:60px 0}
+.steps-grid{display:flex;gap:0;position:relative}
+.step-card{flex:1;text-align:center;padding:2rem 1.5rem;position:relative}
+.step-card::after{content:'';position:absolute;top:42px;right:0;width:50%;height:2px;border-top:2px dashed rgba(197,160,89,0.3)}
+.step-card:last-child::after{display:none}
+.step-card::before{content:'';position:absolute;top:42px;left:0;width:50%;height:2px;border-top:2px dashed rgba(197,160,89,0.3)}
+.step-card:first-child::before{display:none}
+.step-icon{width:40px;height:40px;margin:0 auto 12px}
+.step-icon svg{width:100%;height:100%;stroke:var(--ouro);fill:none;stroke-width:1.5}
+.step-num{font-size:48px;font-weight:800;color:var(--ouro);line-height:1;margin-bottom:8px}
+.step-title{font-size:13px;font-weight:600;color:var(--offwhite);text-transform:uppercase;letter-spacing:3px;margin-bottom:8px}
+.step-desc{font-size:14px;font-weight:300;color:var(--offwhite);line-height:1.6}
+
+/* ===== S5: PROVA SOCIAL ===== */
+.prova-social{padding:60px 0}
+.prova-social .section-label{text-align:left}
+.carousel-outer{width:100vw;margin-left:calc(-50vw + 50%);overflow:hidden;position:relative}
+.carousel-track{display:flex;gap:16px;padding:0 24px;cursor:grab;user-select:none;-webkit-user-select:none;transition:transform .3s ease}
+.carousel-track.grabbing{cursor:grabbing;transition:none}
+.carousel-slide{flex:0 0 300px;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.4);border:1px solid rgba(197,160,89,0.1)}
+.carousel-slide img{width:100%;height:auto;display:block}
+.carousel-arrows{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;opacity:0;transition:opacity .3s ease}
+.carousel-outer:hover .carousel-arrows{opacity:1}
+.carousel-arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(10,10,10,0.8);border:1px solid rgba(197,160,89,0.2);display:flex;align-items:center;justify-content:center;cursor:pointer;pointer-events:auto;transition:border-color .2s ease}
+.carousel-arrow:hover{border-color:rgba(197,160,89,0.5)}
+.carousel-arrow--left{left:12px}
+.carousel-arrow--right{right:12px}
+.carousel-arrow svg{width:16px;height:16px;stroke:var(--ouro);fill:none;stroke-width:2}
+.carousel-arrow.hidden{display:none}
+.carousel-dots{display:flex;justify-content:center;gap:10px;margin-top:20px}
+.carousel-dot{width:8px;height:8px;border-radius:50%;background:var(--ouro);opacity:0.2;cursor:pointer;border:none;padding:0;transition:opacity .3s ease}
+.carousel-dot.active{opacity:1}
+
+/* ===== S6: BENEFICIOS ===== */
+.beneficios{padding:60px 0}
+.beneficios-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+.benef-card{
+background:var(--ouro-soft);border-left:3px solid var(--ouro);padding:24px;
+transition:transform .2s ease,border-color .2s ease;
+}
+.benef-card:hover{transform:scale(1.02);border-color:rgba(197,160,89,0.8)}
+.benef-icon{width:28px;height:28px;margin-bottom:10px}
+.benef-icon svg{width:100%;height:100%;stroke:var(--ouro);fill:none;stroke-width:1.5}
+.benef-title{font-size:13px;font-weight:700;color:var(--ouro);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px}
+.benef-desc{font-size:14px;font-weight:400;color:var(--offwhite);line-height:1.6}
+
+/* ===== S7: GALERIA ===== */
+.galeria{padding:60px 0}
+.galeria-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+.galeria-item{
+aspect-ratio:4/5;background:var(--ouro-soft);border:1px solid rgba(197,160,89,0.2);
+display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+transition:transform .2s ease,border-color .2s ease;cursor:pointer;
+}
+.galeria-item:hover{transform:scale(1.03);border-color:rgba(197,160,89,0.5)}
+.galeria-item svg{width:24px;height:24px;stroke:var(--cinza-apagado);fill:none;stroke-width:1.5}
+.galeria-item span{font-size:10px;color:var(--cinza-apagado);text-transform:uppercase;letter-spacing:1px}
+.ancoragem-wrap{max-width:800px;margin:2.5rem auto 0;text-align:center}
+.ancoragem-label{font-size:12px;font-weight:600;color:var(--ouro);text-transform:uppercase;letter-spacing:3px;margin-bottom:24px}
+.ancoragem-cards{display:flex;gap:24px;justify-content:center}
+.ancoragem-card{flex:1;max-width:380px;border-radius:4px;padding:24px;text-align:center}
+.ancoragem-card--old{background:rgba(92,32,32,0.08);border:1px solid rgba(92,32,32,0.2)}
+.ancoragem-card--new{background:rgba(197,160,89,0.08);border:1px solid rgba(197,160,89,0.25);box-shadow:0 0 30px rgba(197,160,89,0.06)}
+.ancoragem-col-tag{font-size:11px;text-transform:uppercase;letter-spacing:2px;margin-bottom:16px}
+.ancoragem-col-tag--old{color:var(--cinza-apagado)}
+.ancoragem-col-tag--new{color:var(--ouro)}
+.ancoragem-img{width:100%;height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;margin-bottom:16px}
+.ancoragem-img--old{background:rgba(240,239,234,0.04);border:1px dashed rgba(240,239,234,0.15)}
+.ancoragem-img--new{background:rgba(197,160,89,0.05);border:1px dashed rgba(197,160,89,0.2)}
+.ancoragem-img svg{width:24px;height:24px;stroke-width:1.5;fill:none}
+.ancoragem-img--old svg{stroke:var(--cinza-apagado)}
+.ancoragem-img--new svg{stroke:var(--ouro);opacity:0.4}
+.ancoragem-img span{font-size:11px;text-align:center;line-height:1.5}
+.ancoragem-img--old span{color:var(--cinza-apagado)}
+.ancoragem-img--new span{color:var(--ouro);opacity:0.4}
+.ancoragem-preco{font-size:28px;line-height:1.2}
+.ancoragem-preco--old{font-weight:300;color:var(--offwhite);text-decoration:line-through;text-decoration-color:rgba(240,239,234,0.4)}
+.ancoragem-preco--new{font-weight:700;color:var(--ouro)}
+.ancoragem-footer{margin-top:24px}
+.ancoragem-contexto{font-size:14px;font-weight:400;color:var(--offwhite)}
+.ancoragem-destaque{font-size:16px;font-weight:600;color:var(--ouro);margin-top:8px}
+
+/* ===== S8: URGENCIA ===== */
+.urgencia-section{padding:60px 0}
+.urgencia-card{max-width:600px;margin:0 auto;padding:40px;background:rgba(197,160,89,0.06);border:1px solid rgba(197,160,89,0.2);text-align:center}
+.vagas-label{font-size:12px;font-weight:600;color:var(--ouro);text-transform:uppercase;letter-spacing:3px;margin-bottom:16px}
+.vagas-bar{width:100%;height:8px;background:rgba(197,160,89,0.12);border-radius:4px;overflow:hidden;margin-bottom:8px}
+.vagas-bar-fill{height:100%;width:0%;background:var(--ouro);border-radius:4px;transition:width 2s ease-out}
+.vagas-bar-fill.animated{width:80%}
+.vagas-sub{font-size:12px;color:var(--ouro);font-weight:400;text-align:right;margin-bottom:0}
+.urgencia-divider{width:40%;height:1px;background:rgba(197,160,89,0.15);margin:24px auto;border:none}
+.urgencia-card h2{font-size:22px;font-weight:700;color:var(--ouro);text-transform:uppercase;letter-spacing:3px;margin-bottom:16px}
+.urgencia-corpo{font-size:14px;font-weight:400;color:var(--offwhite);line-height:1.7;margin-bottom:0}
+.urgencia-final{font-size:16px;font-weight:600;color:var(--ouro);font-style:italic;margin-top:24px}
+
+/* ===== S9: CTA FINAL ===== */
+.cta-final{padding:80px 0 40px;text-align:center}
+.cta-final-logo{font-size:12px;font-weight:600;letter-spacing:3px;color:var(--ouro);text-transform:uppercase;margin-bottom:2rem}
+.cta-final h2{font-size:clamp(1.5rem,4vw,2.2rem);font-weight:800;letter-spacing:5px;margin-bottom:2rem}
+.cta-final .cta-btn{font-size:16px;padding:20px 48px;animation:cta-pulse 2s ease-in-out infinite}
+@keyframes cta-pulse{
+0%,100%{box-shadow:0 0 40px rgba(197,160,89,0.15)}
+50%{box-shadow:0 0 60px rgba(197,160,89,0.35)}
+}
+.cta-final-micro{font-size:12px;color:var(--cinza-apagado);font-weight:400;margin-top:16px}
+.cta-manifesto{margin-top:2rem;font-size:12px;font-weight:300;color:var(--cinza-apagado);line-height:1.6}
+.cta-ig{display:inline-block;margin-top:12px;font-size:12px;font-weight:500;color:var(--ouro);text-decoration:none}
+.cta-ig:hover{text-decoration:underline}
+
+/* ===== FOOTER ===== */
+.footer{padding:20px 0;text-align:center;border-top:1px solid rgba(197,160,89,0.15)}
+.footer p{font-size:11px;color:var(--cinza-apagado)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+.urgency-bar span{font-size:9px;letter-spacing:1px}
+section{padding:48px 0}
+.hero{min-height:auto;padding:48px 0 32px}
+.hero{min-height:auto;padding:48px 0 32px}
+.hero-grid{display:flex;flex-direction:column;gap:0}
+.hero-text{align-items:center;text-align:center}
+.hero-logo{width:180px;margin-bottom:24px}
+.hero-subtitle{max-width:100%;margin-bottom:24px}
+.hero-visual{width:100%;margin-bottom:24px}
+.hero-placeholder{height:280px}
+.hero-micro-cta{text-align:center}
+.comparativo-wrapper{flex-direction:column;gap:0}
+.comp-vs{
+position:relative;top:auto;left:auto;
+transform:none;margin:-20px auto;z-index:10;
+}
+.problema-grid{flex-direction:column;gap:1.5rem}
+.problema-visual{flex:none;width:100%}
+.steps-grid{flex-direction:column;gap:0}
+.step-card::after,.step-card::before{display:none}
+.step-card{border-left:2px dashed rgba(197,160,89,0.3);text-align:left;padding:1.5rem 1.5rem 1.5rem 2rem}
+.step-card:last-child{border-left-style:solid}
+.step-icon{margin:0 0 8px}
+.prova-social .section-label{text-align:center}
+.carousel-slide{flex:0 0 280px}
+.carousel-arrows{display:none}
+.beneficios-grid{grid-template-columns:1fr}
+.galeria-grid{grid-template-columns:repeat(2,1fr)}
+.ancoragem-cards{flex-direction:column;gap:16px}
+.ancoragem-card{max-width:100%}
+h1{letter-spacing:3px}
+h2{letter-spacing:3px}
+.hook{font-size:16px}
+body{padding-bottom:80px}
+.cta-final .cta-btn{font-size:13px;padding:18px 32px;letter-spacing:2px}
+}
+</style>
+</head>
+<body>
+
+<!-- BARRA DE URGENCIA FIXA -->
+<a href="https://chat.whatsapp.com/PLACEHOLDER" target="_blank" rel="noopener" class="urgency-bar">
+<span>&#9670; GRUPO COM VAGAS LIMITADAS. ENTRE ENQUANTO HÁ ACESSO &#9670;</span>
+</a>
+
+<!-- CTA FLUTUANTE MOBILE -->
+<div class="floating-cta" id="floatingCta">
+<a href="https://chat.whatsapp.com/PLACEHOLDER" target="_blank" rel="noopener">ENTRAR NO GRUPO</a>
+</div>
+
+<!-- ============================================ -->
+<!-- S1: HERO (headline nova — CORREÇÃO 2) -->
+<!-- ============================================ -->
+<section class="hero" id="hero">
+<div class="container">
+<div class="hero-grid">
+<div class="hero-text fade-up">
+<img src="seletto sem fundo.png" alt="Seletto Parfum" class="hero-logo">
+<h1>ALGUÉM QUE VOCÊ CONHECE<br>JÁ COMPRA POR METADE DO PREÇO<br>QUE VOCÊ PAGA NO MARKETPLACE.</h1>
+<p class="hero-subtitle">Fragrâncias árabes 100% originais. Lotes validados. Acesso restrito via grupo privado.</p>
+</div>
+<div class="hero-visual fade-up">
+<div class="hero-placeholder">
+<span>FOTO DO PRODUTO PRINCIPAL</span>
+</div>
+</div>
+<a href="#comparativo" class="hero-micro-cta fade-up">&#8595; Descubra por que somos diferentes</a>
+</div>
+</div>
+</section>
+
+<!-- ============================================ -->
+<!-- S2: COMPARATIVO ML vs SELETTO (CORREÇÃO 4) -->
+<!-- ============================================ -->
+<section class="comparativo" id="comparativo">
+<div class="container">
+<div class="comparativo-header fade-up">
+<p class="section-label">COMPARATIVO</p>
+<h2>A ESCOLHA É SUA.</h2>
+</div>
+<div class="comparativo-wrapper fade-up">
+<div class="comp-col comp-col--mk">
+<p class="comp-title">MERCADO LIVRE</p>
+<div class="comp-item"><span class="comp-icon">&#10005;</span><span>Taxas de até 20% embutidas no preço</span></div>
+<div class="comp-item"><span class="comp-icon">&#10005;</span><span>Sem garantia de autenticidade do produto</span></div>
+<div class="comp-item"><span class="comp-icon">&#10005;</span><span>Atendimento genérico por chatbot</span></div>
+<div class="comp-item"><span class="comp-icon">&#10005;</span><span>Entrega padrão sem cuidado</span></div>
+<div class="comp-item"><span class="comp-icon">&#10005;</span><span>Catálogo aleatório, sem curadoria</span></div>
+<div class="comp-item"><span class="comp-icon">&#10005;</span><span>Você não sabe o que está comprando</span></div>
+</div>
+<div class="comp-vs">VS</div>
+<div class="comp-col comp-col--sel">
+<p class="comp-title">GRUPO SELETTO</p>
+<div class="comp-item"><span class="comp-icon">&#9670;</span><span>Preço direto, zero taxa de intermediário</span></div>
+<div class="comp-item"><span class="comp-icon">&#9670;</span><span>100% original. Lote validado e verificado</span></div>
+<div class="comp-item"><span class="comp-icon">&#9670;</span><span>Consultoria individual no WhatsApp</span></div>
+<div class="comp-item"><span class="comp-icon">&#9670;</span><span>Entrega premium com embalagem blindada</span></div>
+<div class="comp-item"><span class="comp-icon">&#9670;</span><span>Catálogo implacável. Só fragrâncias desejadas</span></div>
+<div class="comp-item"><span class="comp-icon">&#9670;</span><span>Você sabe exatamente o que está recebendo</span></div>
+</div>
+</div>
+<p class="comp-footer fade-up">Mesma fragrância. Experiência incomparável.</p>
+</div>
+</section>
+
+<!-- HOOK -->
+<div class="hook-wrap"><div class="hook fade-up">Mas por que isso acontece?</div></div>
+
+<!-- ============================================ -->
+<!-- S3: PROBLEMA -->
+<!-- ============================================ -->
+<section class="problema" id="problema">
+<div class="container">
+<div class="problema-grid">
+<div class="problema-text fade-up">
+<p class="section-label">O QUE NINGUÉM TE CONTA</p>
+<h2>VOCÊ JÁ PAGOU CARO<br>POR ALGO QUE NÃO ERA<br>ORIGINAL.</h2>
+<p class="problema-corpo">Em marketplaces como Shopee e Mercado Livre, há pouco ou nenhum controle sobre falsificações. Essas plataformas cobram altas taxas dos vendedores (cerca de 40%) e esse custo é repassado diretamente pra você. O resultado: você paga mais caro por um produto que não sabe se é original.</p>
+<p class="problema-ruptura">A Seletto Parfum nasceu para eliminar isso.</p>
+<p class="problema-corpo" style="margin-top:1rem">Trabalhamos exclusivamente com produtos originais, adquiridos de distribuidores verificados. Sem taxa de plataforma, sem intermediários, sem dúvida sobre autenticidade. O preço é menor porque o caminho até você é mais curto.</p>
+</div>
+<div class="problema-visual fade-up">
+<div class="problema-placeholder">
+<img src="mlshopee.jpeg" alt="Embalagens danificadas de Mercado Livre e Shopee">
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- HOOK -->
+<div class="hook-wrap"><div class="hook fade-up">Veja como funciona</div></div>
+
+<!-- ============================================ -->
+<!-- S4: COMO FUNCIONA + CTA #1 -->
+<!-- ============================================ -->
+<section class="como-funciona" id="como-funciona">
+<div class="container">
+<p class="section-label fade-up" style="text-align:center">COMO FUNCIONA</p>
+<div class="steps-grid fade-up">
+<div class="step-card">
+<div class="step-icon"><svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><path d="M12 3v12M8 11l4 4 4-4"/></svg></div>
+<div class="step-num">01</div>
+<div class="step-title">ENTRE NO GRUPO</div>
+<div class="step-desc">Clique no botão, entre no grupo exclusivo do WhatsApp. Leva 3 segundos.</div>
+</div>
+<div class="step-card">
+<div class="step-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/></svg></div>
+<div class="step-num">02</div>
+<div class="step-title">ACOMPANHE OS DROPS</div>
+<div class="step-desc">Receba anúncios de novos lotes validados antes de qualquer canal.</div>
+</div>
+<div class="step-card">
+<div class="step-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+<div class="step-num">03</div>
+<div class="step-title">PEÇA NO PRIVADO</div>
+<div class="step-desc">Escolheu a fragrância? Chame no privado para atendimento sob medida.</div>
+</div>
+</div>
+<!-- CTA 1 -->
+<div class="cta-block fade-up">
+<p class="cta-micro">Já sabe o que quer?</p>
+<a href="https://chat.whatsapp.com/PLACEHOLDER" target="_blank" rel="noopener" class="cta-btn">ENTRAR NO GRUPO AGORA</a>
+<p class="cta-sub">Acesso gratuito. Sem compromisso de compra.</p>
+</div>
+</div>
+</section>
+
+<!-- HOOK -->
+<div class="hook-wrap"><div class="hook fade-up">Quem já entrou, aprovou</div></div>
+
+<!-- ============================================ -->
+<!-- S5: PROVA SOCIAL + CTA #2 -->
+<!-- ============================================ -->
+<section class="prova-social" id="prova-social">
+<div class="container">
+<p class="section-label fade-up">O QUE DIZEM NOSSOS MEMBROS</p>
+</div>
+<div class="carousel-outer fade-up" id="carousel">
+<div class="carousel-track" id="carouselTrack">
+<div class="carousel-slide"><img src="whatsapp_chat_1.png" alt="Conversa com Marcos sobre comparação ML vs Seletto"></div>
+<div class="carousel-slide"><img src="whatsapp_chat_4.png" alt="Conversa com Paula sobre coleção de 5 frascos"></div>
+<div class="carousel-slide"><img src="whatsapp_chat_6.png" alt="Conversa com Rayan sobre Royal Bleu no shopping"></div>
+<div class="carousel-slide"><img src="whatsapp_chat_3.png" alt="Conversa com Mariana sobre presente pro pai"></div>
+<div class="carousel-slide"><img src="whatsapp_chat_2.png" alt="Conversa com Léo Jr sobre consultoria"></div>
+<div class="carousel-slide"><img src="whatsapp_chat_5.png" alt="Conversa com João Paulo sobre Bidaya"></div>
+</div>
+<div class="carousel-arrows" id="carouselArrows">
+<button class="carousel-arrow carousel-arrow--left" id="carouselPrev" aria-label="Slide anterior"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+<button class="carousel-arrow carousel-arrow--right" id="carouselNext" aria-label="Próximo slide"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+</div>
+</div>
+<div class="carousel-dots" id="carouselDots">
+<button class="carousel-dot active" data-slide="0" aria-label="Slide 1"></button>
+<button class="carousel-dot" data-slide="1" aria-label="Slide 2"></button>
+<button class="carousel-dot" data-slide="2" aria-label="Slide 3"></button>
+<button class="carousel-dot" data-slide="3" aria-label="Slide 4"></button>
+<button class="carousel-dot" data-slide="4" aria-label="Slide 5"></button>
+<button class="carousel-dot" data-slide="5" aria-label="Slide 6"></button>
+</div>
+<div class="container">
+<div class="cta-block fade-up" style="margin-top:32px">
+<p class="cta-micro">Junte-se a quem já entendeu.</p>
+<a href="https://chat.whatsapp.com/PLACEHOLDER" target="_blank" rel="noopener" class="cta-btn">ENTRAR NO GRUPO EXCLUSIVO</a>
+</div>
+</div>
+</section>
+
+<!-- HOOK -->
+<div class="hook-wrap"><div class="hook fade-up">O que você acessa no grupo</div></div>
+
+<!-- ============================================ -->
+<!-- S6: BENEFICIOS -->
+<!-- ============================================ -->
+<section class="beneficios" id="beneficios">
+<div class="container">
+<p class="section-label fade-up">O QUE VOCÊ ACESSA</p>
+<h2 class="fade-up" style="margin-bottom:1.5rem">DENTRO DO GRUPO.</h2>
+<div class="beneficios-grid">
+<div class="benef-card fade-up">
+<div class="benef-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+<div class="benef-title">DROPS ANTES DE QUALQUER CANAL</div>
+<div class="benef-desc">Novos lotes validados? O grupo sabe primeiro. Antes do site, antes do Instagram, antes de tudo.</div>
+</div>
+<div class="benef-card fade-up">
+<div class="benef-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+<div class="benef-title">PREÇO SEM TAXA DE MARKETPLACE</div>
+<div class="benef-desc">O valor real da fragrância, direto. Sem 20% de intermediário inflando o que você paga.</div>
+</div>
+<div class="benef-card fade-up">
+<div class="benef-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+<div class="benef-title">CONSULTORIA INDIVIDUAL NO PRIVADO</div>
+<div class="benef-desc">Dúvidas sobre notas, fixação, ocasião? Atendimento sob medida, como um consultor faria.</div>
+</div>
+<div class="benef-card fade-up">
+<div class="benef-icon"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+<div class="benef-title">CONTEÚDO EXCLUSIVO DE BASTIDORES</div>
+<div class="benef-desc">Vídeos detalhados de cada fragrância, unboxing, notas olfativas. Só para membros.</div>
+</div>
+<div class="benef-card fade-up">
+<div class="benef-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+<div class="benef-title">FLASH SALES SEM AVISO</div>
+<div class="benef-desc">Ofertas que aparecem sem aviso prévio. Quem está dentro, garante. Quem saiu, perdeu.</div>
+</div>
+<div class="benef-card fade-up">
+<div class="benef-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+<div class="benef-title">ENCOMENDA COLETIVA POR DEMANDA</div>
+<div class="benef-desc">O catálogo da Seletto vai além do estoque. Qualquer fragrância validada pode ser encomendada sob demanda. O grupo reúne os pedidos e o frete é dividido entre todos.</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- HOOK -->
+<div class="hook-wrap"><div class="hook fade-up">Conheça as fragrâncias</div></div>
+
+<!-- ============================================ -->
+<!-- S7: GALERIA -->
+<!-- ============================================ -->
+<section class="galeria" id="galeria">
+<div class="container">
+<p class="section-label fade-up">CATÁLOGO</p>
+<div class="galeria-grid fade-up">
+<div class="galeria-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M5 21l3.5-4.5 2.5 3 3.5-4.5L19 21"/></svg><span>FOTO DO PRODUTO</span></div>
+<div class="galeria-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M5 21l3.5-4.5 2.5 3 3.5-4.5L19 21"/></svg><span>FOTO DO PRODUTO</span></div>
+<div class="galeria-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M5 21l3.5-4.5 2.5 3 3.5-4.5L19 21"/></svg><span>FOTO DO PRODUTO</span></div>
+<div class="galeria-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M5 21l3.5-4.5 2.5 3 3.5-4.5L19 21"/></svg><span>FOTO DO PRODUTO</span></div>
+<div class="galeria-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M5 21l3.5-4.5 2.5 3 3.5-4.5L19 21"/></svg><span>FOTO DO PRODUTO</span></div>
+<div class="galeria-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M5 21l3.5-4.5 2.5 3 3.5-4.5L19 21"/></svg><span>FOTO DO PRODUTO</span></div>
+</div>
+<div class="ancoragem-wrap fade-up">
+<p class="ancoragem-label">EXEMPLO REAL DE ECONOMIA</p>
+<div class="ancoragem-cards">
+<div class="ancoragem-card ancoragem-card--old">
+<p class="ancoragem-col-tag ancoragem-col-tag--old">NO MARKETPLACE</p>
+<div class="ancoragem-img ancoragem-img--old">
+<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M5 21l3.5-4.5 2.5 3 3.5-4.5L19 21"/></svg>
+<span>PRINT DO ANÚNCIO<br>NO MARKETPLACE</span>
+</div>
+<p class="ancoragem-preco ancoragem-preco--old">R$ 189,90</p>
+</div>
+<div class="ancoragem-card ancoragem-card--new">
+<p class="ancoragem-col-tag ancoragem-col-tag--new">NO GRUPO SELETTO</p>
+<div class="ancoragem-img ancoragem-img--new">
+<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M5 21l3.5-4.5 2.5 3 3.5-4.5L19 21"/></svg>
+<span>FOTO DO PRODUTO<br>SELETTO</span>
+</div>
+<p class="ancoragem-preco ancoragem-preco--new">R$ 129,90</p>
+</div>
+</div>
+<div class="ancoragem-footer">
+<p class="ancoragem-contexto">Mesma fragrância. Mesmo frasco. Sem taxa de marketplace.</p>
+<p class="ancoragem-destaque">Economia de R$ 60 neste produto.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============================================ -->
+<!-- S8: URGENCIA -->
+<!-- ============================================ -->
+<section class="urgencia-section" id="urgencia">
+<div class="container">
+<div class="urgencia-card fade-up">
+<p class="vagas-label">VAGAS NO GRUPO</p>
+<div class="vagas-bar"><div class="vagas-bar-fill" id="vagasBar"></div></div>
+<p class="vagas-sub">Restam poucas vagas</p>
+<hr class="urgencia-divider">
+<h2>O ACESSO É POR TEMPO LIMITADO.</h2>
+<p class="urgencia-corpo">Quando o grupo atingir a capacidade, o link será desativado. Sem lista de espera. Sem segunda chance.</p>
+<p class="urgencia-final">Se você está lendo isso, ainda há acesso.</p>
+</div>
+</div>
+</section>
+
+<!-- ============================================ -->
+<!-- S9: CTA FINAL -->
+<!-- ============================================ -->
+<section class="cta-final" id="cta-final">
+<div class="container">
+<p class="cta-final-logo fade-up">SELETTO PARFUM</p>
+<h2 class="fade-up">ENTRE NO CLUBE.</h2>
+<div class="fade-up">
+<a href="https://chat.whatsapp.com/PLACEHOLDER" target="_blank" rel="noopener" class="cta-btn">ENTRAR NO GRUPO EXCLUSIVO</a>
+<p class="cta-final-micro">Gratuito. Sem compromisso. Apenas acesso.</p>
+</div>
+<p class="cta-manifesto fade-up">Seletto Parfum. Clube restrito de fragrâncias árabes originais.<br>Lotes validados. Atendimento privado. Sem intermediários.</p>
+<a href="https://instagram.com/selettoparfum" target="_blank" rel="noopener" class="cta-ig fade-up">@selettoparfum</a>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+<div class="container">
+<p>&copy; 2025 Seletto Parfum. Todos os direitos reservados.</p>
+</div>
+</footer>
+
+<script>
+(function(){
+  // Fade-up observer
+  var fadeObs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible')});
+  },{threshold:0.15});
+  document.querySelectorAll('.fade-up').forEach(function(el){fadeObs.observe(el)});
+
+  // Vagas bar animation
+  var barObs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){document.getElementById('vagasBar').classList.add('animated');barObs.unobserve(e.target)}
+    });
+  },{threshold:0.5});
+  var vb=document.getElementById('vagasBar');
+  if(vb)barObs.observe(vb);
+
+  // Floating CTA (mobile only)
+  var floating=document.getElementById('floatingCta');
+  var hero=document.getElementById('hero');
+  var ctaFinal=document.getElementById('cta-final');
+  if(floating&&hero&&ctaFinal&&window.innerWidth<=768){
+    window.addEventListener('scroll',function(){
+      var heroBottom=hero.getBoundingClientRect().bottom;
+      var ctaTop=ctaFinal.getBoundingClientRect().top;
+      if(heroBottom<0&&ctaTop>window.innerHeight){
+        floating.classList.add('active');floating.classList.remove('hidden');
+      }else{
+        floating.classList.remove('active');floating.classList.add('hidden');
+      }
+    },{passive:true});
+  }
+
+  // Carousel
+  var track=document.getElementById('carouselTrack');
+  var slides=track?track.querySelectorAll('.carousel-slide'):[];
+  var dots=document.querySelectorAll('.carousel-dot');
+  var prevBtn=document.getElementById('carouselPrev');
+  var nextBtn=document.getElementById('carouselNext');
+  if(track&&slides.length){
+    var currentSlide=0;
+    var isDragging=false;
+    var startX=0;
+    var startTime=0;
+    var currentTranslate=0;
+    var prevTranslate=0;
+
+    function getSlideWidth(){
+      return slides[0].offsetWidth+16;
+    }
+    function getMaxTranslate(){
+      return -(track.scrollWidth-track.parentElement.offsetWidth+24);
+    }
+    function setPosition(val,smooth){
+      if(smooth!==false)track.classList.remove('grabbing');
+      currentTranslate=Math.max(getMaxTranslate(),Math.min(0,val));
+      track.style.transform='translateX('+currentTranslate+'px)';
+    }
+    function goToSlide(n){
+      currentSlide=Math.max(0,Math.min(n,slides.length-1));
+      var target=-(currentSlide*getSlideWidth());
+      target=Math.max(getMaxTranslate(),Math.min(0,target));
+      track.classList.remove('grabbing');
+      setPosition(target);
+      prevTranslate=currentTranslate;
+      updateDots();
+      updateArrows();
+    }
+    function updateDots(){
+      dots.forEach(function(d,i){d.classList.toggle('active',i===currentSlide)});
+    }
+    function updateArrows(){
+      if(prevBtn)prevBtn.classList.toggle('hidden',currentSlide===0);
+      if(nextBtn)nextBtn.classList.toggle('hidden',currentSlide>=slides.length-1);
+    }
+    function getClosestSlide(){
+      var sw=getSlideWidth();
+      return Math.round(Math.abs(currentTranslate)/sw);
+    }
+
+    // Drag handlers
+    function dragStart(x){
+      isDragging=true;startX=x;startTime=Date.now();
+      track.classList.add('grabbing');prevTranslate=currentTranslate;
+    }
+    function dragMove(x){
+      if(!isDragging)return;
+      var diff=x-startX;
+      setPosition(prevTranslate+diff);
+    }
+    function dragEnd(x){
+      if(!isDragging)return;
+      isDragging=false;track.classList.remove('grabbing');
+      var diff=x-startX;var elapsed=Date.now()-startTime;
+      var velocity=Math.abs(diff)/elapsed;
+      if(Math.abs(diff)>40){
+        var jump=velocity>0.8?2:1;
+        if(diff<0)goToSlide(currentSlide+jump);
+        else goToSlide(currentSlide-jump);
+      }else{
+        goToSlide(getClosestSlide());
+      }
+    }
+
+    // Mouse events
+    track.addEventListener('mousedown',function(e){e.preventDefault();dragStart(e.clientX)});
+    window.addEventListener('mousemove',function(e){if(isDragging){e.preventDefault();dragMove(e.clientX)}});
+    window.addEventListener('mouseup',function(e){if(isDragging)dragEnd(e.clientX)});
+
+    // Touch events
+    track.addEventListener('touchstart',function(e){dragStart(e.touches[0].clientX)},{passive:true});
+    track.addEventListener('touchmove',function(e){dragMove(e.touches[0].clientX)},{passive:true});
+    track.addEventListener('touchend',function(e){dragEnd(e.changedTouches[0].clientX)});
+
+    // Prevent image drag
+    track.addEventListener('dragstart',function(e){e.preventDefault()});
+
+    // Dots
+    dots.forEach(function(dot){
+      dot.addEventListener('click',function(){goToSlide(parseInt(this.getAttribute('data-slide')))});
+    });
+
+    // Arrows
+    if(prevBtn)prevBtn.addEventListener('click',function(){goToSlide(currentSlide-1)});
+    if(nextBtn)nextBtn.addEventListener('click',function(){goToSlide(currentSlide+1)});
+
+    updateArrows();
+  }
+})();
+</script>
+
+</body>
+</html>
