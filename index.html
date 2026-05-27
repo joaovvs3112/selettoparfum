@@ -10,6 +10,7 @@
 <meta property="og:description" content="Fragrâncias árabes originais. Sem marketplace. Sem intermediário.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -23,12 +24,14 @@
 --ouro-glow:rgba(197,160,89,0.25);
 --erro:#5C2020;
 --cinza-apagado:rgba(240,239,234,0.3);
+--font-headline:'Switzer','Helvetica Neue',Arial,sans-serif;
+--font-body:'Inter','Helvetica Neue',Arial,sans-serif;
 }
 html{scroll-behavior:smooth;font-size:16px}
 body{
 background:var(--preto);
 color:var(--offwhite);
-font-family:'Inter','Helvetica Neue',Arial,sans-serif;
+font-family:var(--font-body);
 font-weight:400;
 line-height:1.7;
 overflow-x:hidden;
@@ -78,9 +81,9 @@ color:var(--ouro);text-transform:uppercase;margin-bottom:1.5rem;
 }
 
 /* ===== TITULOS ===== */
-h1,h2{font-weight:700;color:var(--ouro);text-transform:uppercase;letter-spacing:4px;line-height:1.3}
-h1{font-size:clamp(1.5rem,4vw,2.5rem);font-weight:800}
-h2{font-size:clamp(1.3rem,3.5vw,2rem)}
+h1,h2{font-family:var(--font-headline);font-weight:700;color:var(--ouro);text-transform:none;letter-spacing:-0.02em;line-height:1.15}
+h1{font-size:52px;font-weight:700}
+h2{font-size:36px;font-weight:600}
 
 /* ===== HOOKS (pill divider) ===== */
 .hook-wrap{
@@ -133,6 +136,7 @@ transition:background .3s ease,box-shadow .3s ease;
 .hero-logo{width:240px;margin-bottom:32px}
 .hero h1{margin-bottom:1.2rem}
 .hero-subtitle{font-weight:400;font-size:16px;color:var(--offwhite);line-height:1.7;max-width:440px}
+.hero-destaque{color:var(--ouro);font-weight:600}
 .hero-placeholder{
 width:100%;height:100%;background:rgba(197,160,89,0.06);border:1px solid rgba(197,160,89,0.15);
 display:flex;align-items:center;justify-content:center;
@@ -245,17 +249,21 @@ transition:transform .2s ease,border-color .2s ease;
 .benef-title{font-size:13px;font-weight:700;color:var(--ouro);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px}
 .benef-desc{font-size:14px;font-weight:400;color:var(--offwhite);line-height:1.6}
 
-/* ===== S7: GALERIA ===== */
-.galeria{padding:60px 0}
-.galeria-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
-.galeria-item{
-aspect-ratio:4/5;background:var(--ouro-soft);border:1px solid rgba(197,160,89,0.2);
-display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
-transition:transform .2s ease,border-color .2s ease;cursor:pointer;
-}
-.galeria-item:hover{transform:scale(1.03);border-color:rgba(197,160,89,0.5)}
-.galeria-item svg{width:24px;height:24px;stroke:var(--cinza-apagado);fill:none;stroke-width:1.5}
-.galeria-item span{font-size:10px;color:var(--cinza-apagado);text-transform:uppercase;letter-spacing:1px}
+/* ===== S7: CATÁLOGO ===== */
+.catalogo{padding:60px 0}
+.catalogo .section-label{text-align:left;margin-bottom:24px}
+.catalogo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1000px;margin:0 auto 2rem}
+.catalogo-card{aspect-ratio:4/5;background:rgba(197,160,89,0.04);border:1px solid rgba(197,160,89,0.12);border-radius:8px;overflow:hidden;position:relative;display:flex;flex-direction:column;cursor:default}
+.catalogo-img{flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.catalogo-img svg{width:24px;height:24px;stroke:rgba(240,239,234,0.2);fill:none;stroke-width:1.5}
+.catalogo-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+.catalogo-card:hover .catalogo-img img{transform:scale(1.05)}
+.catalogo-info{flex-shrink:0;padding:14px 16px;background:rgba(10,10,10,0.9);border-top:1px solid rgba(197,160,89,0.08)}
+.catalogo-nome{color:var(--offwhite);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.catalogo-marca{color:rgba(240,239,234,0.4);font-weight:400;font-size:11px;margin-top:4px}
+.catalogo-tag{position:absolute;top:12px;right:12px;padding:5px 10px;border-radius:4px;background:rgba(10,10,10,0.75);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);font-size:10px;text-transform:uppercase;font-weight:600;letter-spacing:1px;z-index:2}
+.catalogo-tag--ouro{color:var(--ouro)}
+.catalogo-tag--offwhite{color:var(--offwhite)}
 .ancoragem-wrap{max-width:800px;margin:2.5rem auto 0;text-align:center}
 .ancoragem-label{font-size:12px;font-weight:600;color:var(--ouro);text-transform:uppercase;letter-spacing:3px;margin-bottom:24px}
 .ancoragem-cards{display:flex;gap:24px;justify-content:center}
@@ -290,14 +298,14 @@ transition:transform .2s ease,border-color .2s ease;cursor:pointer;
 .vagas-bar-fill.animated{width:80%}
 .vagas-sub{font-size:12px;color:var(--ouro);font-weight:400;text-align:right;margin-bottom:0}
 .urgencia-divider{width:40%;height:1px;background:rgba(197,160,89,0.15);margin:24px auto;border:none}
-.urgencia-card h2{font-size:22px;font-weight:700;color:var(--ouro);text-transform:uppercase;letter-spacing:3px;margin-bottom:16px}
+.urgencia-card h2{font-size:22px;font-weight:600;margin-bottom:16px}
 .urgencia-corpo{font-size:14px;font-weight:400;color:var(--offwhite);line-height:1.7;margin-bottom:0}
 .urgencia-final{font-size:16px;font-weight:600;color:var(--ouro);font-style:italic;margin-top:24px}
 
 /* ===== S9: CTA FINAL ===== */
 .cta-final{padding:80px 0 40px;text-align:center}
 .cta-final-logo{font-size:12px;font-weight:600;letter-spacing:3px;color:var(--ouro);text-transform:uppercase;margin-bottom:2rem}
-.cta-final h2{font-size:clamp(1.5rem,4vw,2.2rem);font-weight:800;letter-spacing:5px;margin-bottom:2rem}
+.cta-final h2{font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;margin-bottom:2rem}
 .cta-final .cta-btn{font-size:16px;padding:20px 48px;animation:cta-pulse 2s ease-in-out infinite}
 @keyframes cta-pulse{
 0%,100%{box-shadow:0 0 40px rgba(197,160,89,0.15)}
@@ -341,11 +349,16 @@ transform:none;margin:-20px auto;z-index:10;
 .carousel-slide{flex:0 0 280px}
 .carousel-arrows{display:none}
 .beneficios-grid{grid-template-columns:1fr}
-.galeria-grid{grid-template-columns:repeat(2,1fr)}
+.catalogo .section-label{text-align:center}
+.catalogo-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+.catalogo-nome{font-size:12px}
+.catalogo-marca{font-size:10px}
+.catalogo-tag{font-size:9px}
+.catalogo-card:hover .catalogo-img img{transform:none}
 .ancoragem-cards{flex-direction:column;gap:16px}
 .ancoragem-card{max-width:100%}
-h1{letter-spacing:3px}
-h2{letter-spacing:3px}
+h1{font-size:32px}
+h2{font-size:26px}
 .hook{font-size:16px}
 body{padding-bottom:80px}
 .cta-final .cta-btn{font-size:13px;padding:18px 32px;letter-spacing:2px}
@@ -372,8 +385,8 @@ body{padding-bottom:80px}
 <div class="hero-grid">
 <div class="hero-text fade-up">
 <img src="seletto sem fundo.png" alt="Seletto Parfum" class="hero-logo">
-<h1>ALGUÉM QUE VOCÊ CONHECE<br>JÁ COMPRA POR METADE DO PREÇO<br>QUE VOCÊ PAGA NO MARKETPLACE.</h1>
-<p class="hero-subtitle">Fragrâncias árabes 100% originais. Lotes validados. Acesso restrito via grupo privado.</p>
+<h1>Alguém que você conhece<br>já compra o mesmo perfume<br>por bem menos do que você.</h1>
+<p class="hero-subtitle">Marketplaces e lojas físicas repassam até 40% em taxas direto pro preço que você paga. <span class="hero-destaque">A Seletto não.</span> Acesso restrito via grupo privado.</p>
 </div>
 <div class="hero-visual fade-up">
 <div class="hero-placeholder">
@@ -392,7 +405,7 @@ body{padding-bottom:80px}
 <div class="container">
 <div class="comparativo-header fade-up">
 <p class="section-label">COMPARATIVO</p>
-<h2>A ESCOLHA É SUA.</h2>
+<h2>A escolha é sua.</h2>
 </div>
 <div class="comparativo-wrapper fade-up">
 <div class="comp-col comp-col--mk">
@@ -430,8 +443,8 @@ body{padding-bottom:80px}
 <div class="problema-grid">
 <div class="problema-text fade-up">
 <p class="section-label">O QUE NINGUÉM TE CONTA</p>
-<h2>VOCÊ JÁ PAGOU CARO<br>POR ALGO QUE NÃO ERA<br>ORIGINAL.</h2>
-<p class="problema-corpo">Em marketplaces como Shopee e Mercado Livre, há pouco ou nenhum controle sobre falsificações. Essas plataformas cobram altas taxas dos vendedores (cerca de 40%) e esse custo é repassado diretamente pra você. O resultado: você paga mais caro por um produto que não sabe se é original.</p>
+<h2>Você já pagou caro<br>por algo que não era<br>original.</h2>
+<p class="problema-corpo">Em marketplaces como Shopee e Mercado Livre, há pouco ou nenhum controle sobre falsificações. Essas plataformas cobram altas taxas dos vendedores (cerca de 40%) e esse custo é repassado diretamente pra você. Em lojas físicas o cenário não é melhor: aluguel, funcionários, taxa de cartão e margem do lojista inflam o preço do mesmo produto em até o dobro. O resultado: você paga mais caro por um produto que não sabe se é original.</p>
 <p class="problema-ruptura">A Seletto Parfum nasceu para eliminar isso.</p>
 <p class="problema-corpo" style="margin-top:1rem">Trabalhamos exclusivamente com produtos originais, adquiridos de distribuidores verificados. Sem taxa de plataforma, sem intermediários, sem dúvida sobre autenticidade. O preço é menor porque o caminho até você é mais curto.</p>
 </div>
@@ -531,7 +544,7 @@ body{padding-bottom:80px}
 <section class="beneficios" id="beneficios">
 <div class="container">
 <p class="section-label fade-up">O QUE VOCÊ ACESSA</p>
-<h2 class="fade-up" style="margin-bottom:1.5rem">DENTRO DO GRUPO.</h2>
+<h2 class="fade-up" style="margin-bottom:1.5rem">Dentro do grupo.</h2>
 <div class="beneficios-grid">
 <div class="benef-card fade-up">
 <div class="benef-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
@@ -573,16 +586,39 @@ body{padding-bottom:80px}
 <!-- ============================================ -->
 <!-- S7: GALERIA -->
 <!-- ============================================ -->
-<section class="galeria" id="galeria">
+<section class="catalogo" id="catalogo">
 <div class="container">
 <p class="section-label fade-up">CATÁLOGO</p>
-<div class="galeria-grid fade-up">
-<div class="galeria-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M5 21l3.5-4.5 2.5 3 3.5-4.5L19 21"/></svg><span>FOTO DO PRODUTO</span></div>
-<div class="galeria-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M5 21l3.5-4.5 2.5 3 3.5-4.5L19 21"/></svg><span>FOTO DO PRODUTO</span></div>
-<div class="galeria-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M5 21l3.5-4.5 2.5 3 3.5-4.5L19 21"/></svg><span>FOTO DO PRODUTO</span></div>
-<div class="galeria-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M5 21l3.5-4.5 2.5 3 3.5-4.5L19 21"/></svg><span>FOTO DO PRODUTO</span></div>
-<div class="galeria-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M5 21l3.5-4.5 2.5 3 3.5-4.5L19 21"/></svg><span>FOTO DO PRODUTO</span></div>
-<div class="galeria-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M5 21l3.5-4.5 2.5 3 3.5-4.5L19 21"/></svg><span>FOTO DO PRODUTO</span></div>
+<div class="catalogo-grid fade-up">
+<div class="catalogo-card">
+<span class="catalogo-tag catalogo-tag--ouro">MAIS VENDIDO</span>
+<div class="catalogo-img"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+<div class="catalogo-info"><div class="catalogo-nome">CLUB DE NUIT INTENSE</div><div class="catalogo-marca">Armaf</div></div>
+</div>
+<div class="catalogo-card">
+<span class="catalogo-tag catalogo-tag--ouro">NOVO DROP</span>
+<div class="catalogo-img"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+<div class="catalogo-info"><div class="catalogo-nome">SUPREMACY COLLECTOR'S EDITION</div><div class="catalogo-marca">Afnan</div></div>
+</div>
+<div class="catalogo-card">
+<span class="catalogo-tag catalogo-tag--offwhite">ESGOTANDO</span>
+<div class="catalogo-img"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+<div class="catalogo-info"><div class="catalogo-nome">KHAMRAH</div><div class="catalogo-marca">Lattafa</div></div>
+</div>
+<div class="catalogo-card">
+<div class="catalogo-img"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+<div class="catalogo-info"><div class="catalogo-nome">ROYAL BLEU</div><div class="catalogo-marca">Orientica</div></div>
+</div>
+<div class="catalogo-card">
+<span class="catalogo-tag catalogo-tag--ouro">ENCOMENDA</span>
+<div class="catalogo-img"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+<div class="catalogo-info"><div class="catalogo-nome">BIDAYA</div><div class="catalogo-marca">Bidaya Parfums</div></div>
+</div>
+<div class="catalogo-card">
+<span class="catalogo-tag catalogo-tag--offwhite">ÚLTIMO LOTE</span>
+<div class="catalogo-img"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+<div class="catalogo-info"><div class="catalogo-nome">OUD MOOD</div><div class="catalogo-marca">Lattafa</div></div>
+</div>
 </div>
 <div class="ancoragem-wrap fade-up">
 <p class="ancoragem-label">EXEMPLO REAL DE ECONOMIA</p>
@@ -622,7 +658,7 @@ body{padding-bottom:80px}
 <div class="vagas-bar"><div class="vagas-bar-fill" id="vagasBar"></div></div>
 <p class="vagas-sub">Restam poucas vagas</p>
 <hr class="urgencia-divider">
-<h2>O ACESSO É POR TEMPO LIMITADO.</h2>
+<h2>O acesso é por tempo limitado.</h2>
 <p class="urgencia-corpo">Quando o grupo atingir a capacidade, o link será desativado. Sem lista de espera. Sem segunda chance.</p>
 <p class="urgencia-final">Se você está lendo isso, ainda há acesso.</p>
 </div>
@@ -635,7 +671,7 @@ body{padding-bottom:80px}
 <section class="cta-final" id="cta-final">
 <div class="container">
 <p class="cta-final-logo fade-up">SELETTO PARFUM</p>
-<h2 class="fade-up">ENTRE NO CLUBE.</h2>
+<h2 class="fade-up">Entre no clube.</h2>
 <div class="fade-up">
 <a href="https://chat.whatsapp.com/PLACEHOLDER" target="_blank" rel="noopener" class="cta-btn">ENTRAR NO GRUPO EXCLUSIVO</a>
 <p class="cta-final-micro">Gratuito. Sem compromisso. Apenas acesso.</p>
