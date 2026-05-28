@@ -137,11 +137,23 @@ transition:background .3s ease,box-shadow .3s ease;
 .hero h1{margin-bottom:1.2rem}
 .hero-subtitle{font-weight:400;font-size:16px;color:var(--offwhite);line-height:1.7;max-width:440px}
 .hero-destaque{color:var(--ouro);font-weight:600}
-.hero-placeholder{
-width:100%;height:100%;background:rgba(197,160,89,0.06);border:1px solid rgba(197,160,89,0.15);
-display:flex;align-items:center;justify-content:center;
+.hero-video-wrap{
+width:100%;max-height:520px;aspect-ratio:9/16;border-radius:12px;overflow:hidden;
+box-shadow:0 8px 40px rgba(0,0,0,0.5);border:1px solid rgba(197,160,89,0.15);
+position:relative;background:#000;
 }
-.hero-placeholder span{font-size:10px;color:var(--cinza-apagado);text-transform:uppercase;letter-spacing:2px;text-align:center;padding:0 12px}
+.hero-video-wrap video{width:100%;height:100%;object-fit:cover;display:block}
+.hero-play-btn{
+position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+width:64px;height:64px;border-radius:50%;background:rgba(10,10,10,0.7);
+border:2px solid var(--ouro);display:flex;align-items:center;justify-content:center;
+cursor:pointer;transition:background .3s ease,border-color .3s ease;z-index:3;
+}
+.hero-play-btn:hover{background:rgba(197,160,89,0.2)}
+.hero-play-btn svg{width:20px;height:20px;fill:var(--ouro);margin-left:3px}
+.hero-play-btn.hidden{display:none}
+.hero-progress{position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(197,160,89,0.1);cursor:pointer;z-index:3}
+.hero-progress-fill{height:100%;width:0%;background:var(--ouro);transition:none}
 
 /* ===== S2: COMPARATIVO COM VS ===== */
 .comparativo{padding:60px 0}
@@ -330,8 +342,8 @@ section{padding:48px 0}
 .hero-text{align-items:center;text-align:center}
 .hero-logo{width:180px;margin-bottom:24px}
 .hero-subtitle{max-width:100%;margin-bottom:24px}
-.hero-visual{width:100%;margin-bottom:24px}
-.hero-placeholder{height:280px}
+.hero-visual{width:80%;margin:0 auto 24px;display:flex;justify-content:center}
+.hero-video-wrap{max-height:480px}
 .hero-micro-cta{text-align:center}
 .comparativo-wrapper{flex-direction:column;gap:0}
 .comp-vs{
@@ -389,8 +401,16 @@ body{padding-bottom:80px}
 <p class="hero-subtitle">Marketplaces e lojas físicas repassam até 40% em taxas direto pro preço que você paga. <span class="hero-destaque">A Seletto não.</span> Acesso restrito via grupo privado.</p>
 </div>
 <div class="hero-visual fade-up">
-<div class="hero-placeholder">
-<span>FOTO DO PRODUTO PRINCIPAL</span>
+<div class="hero-video-wrap" id="heroVideoWrap">
+<video id="heroVideo" poster="thumbnail.jpg" playsinline preload="metadata">
+<source src="vsl.mp4" type="video/mp4">
+</video>
+<button class="hero-play-btn" id="heroPlayBtn" aria-label="Assistir vídeo">
+<svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+</button>
+<div class="hero-progress" id="heroProgress">
+<div class="hero-progress-fill" id="heroProgressFill"></div>
+</div>
 </div>
 </div>
 <a href="#comparativo" class="hero-micro-cta fade-up">&#8595; Descubra por que somos diferentes</a>
@@ -704,6 +724,37 @@ body{padding-bottom:80px}
   },{threshold:0.5});
   var vb=document.getElementById('vagasBar');
   if(vb)barObs.observe(vb);
+
+  // Video player
+  var vid=document.getElementById('heroVideo');
+  var playBtn=document.getElementById('heroPlayBtn');
+  var progBar=document.getElementById('heroProgress');
+  var progFill=document.getElementById('heroProgressFill');
+  if(vid&&playBtn){
+    playBtn.addEventListener('click',function(){
+      vid.play();playBtn.classList.add('hidden');
+    });
+    vid.addEventListener('pause',function(){
+      if(!vid.ended)playBtn.classList.remove('hidden');
+    });
+    vid.addEventListener('ended',function(){
+      playBtn.classList.remove('hidden');
+    });
+    vid.addEventListener('click',function(){
+      if(!vid.paused)vid.pause();
+      else{vid.play();playBtn.classList.add('hidden');}
+    });
+    vid.addEventListener('timeupdate',function(){
+      if(vid.duration){progFill.style.width=(vid.currentTime/vid.duration*100)+'%';}
+    });
+    if(progBar){
+      progBar.addEventListener('click',function(e){
+        var rect=progBar.getBoundingClientRect();
+        var pct=(e.clientX-rect.left)/rect.width;
+        vid.currentTime=pct*vid.duration;
+      });
+    }
+  }
 
   // Floating CTA (mobile only)
   var floating=document.getElementById('floatingCta');
