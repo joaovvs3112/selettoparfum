@@ -155,6 +155,22 @@ cursor:pointer;transition:background .3s ease,border-color .3s ease;z-index:3;
 .hero-progress{position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(197,160,89,0.1);cursor:pointer;z-index:3}
 .hero-progress-fill{height:100%;width:0%;background:var(--ouro);transition:none}
 
+/* ===== S1.5: SENSORIAL ===== */
+.sensorial{padding:80px 0}
+.sensorial-inner{max-width:780px;margin:0 auto}
+.sensorial-inner .section-label{margin-bottom:1.2rem}
+.sensorial-inner h2{margin-bottom:1.5rem}
+.sensorial-corpo{font-size:16px;font-weight:400;color:var(--offwhite);line-height:1.8;margin-bottom:1.2rem}
+.sensorial-ruptura{font-size:17px;font-weight:600;color:var(--ouro);line-height:1.6;margin-top:1.5rem;border-left:3px solid var(--ouro);padding-left:24px}
+
+/* ===== S6.5: ENCOMENDA SOB DEMANDA ===== */
+.encomenda{padding:80px 0}
+.encomenda-inner{max-width:780px;margin:0 auto}
+.encomenda-inner .section-label{margin-bottom:1.2rem}
+.encomenda-inner h2{margin-bottom:1.5rem}
+.encomenda-corpo{font-size:16px;font-weight:400;color:var(--offwhite);line-height:1.8;margin-bottom:1.2rem}
+.encomenda-ruptura{font-size:17px;font-weight:600;color:var(--ouro);line-height:1.6;margin-top:1.5rem;border-left:3px solid var(--ouro);padding-left:24px}
+
 /* ===== S2: COMPARATIVO COM VS ===== */
 .comparativo{padding:60px 0}
 .comparativo-header{text-align:center;margin-bottom:2.5rem}
@@ -397,8 +413,8 @@ body{padding-bottom:80px}
 <div class="hero-grid">
 <div class="hero-text fade-up">
 <img src="seletto sem fundo.png" alt="Seletto Parfum" class="hero-logo">
-<h1>Alguém que você conhece<br>já compra o mesmo perfume<br>por bem menos do que você.</h1>
-<p class="hero-subtitle">Marketplaces e lojas físicas repassam até 40% em taxas direto pro preço que você paga. <span class="hero-destaque">A Seletto não.</span> Acesso restrito via grupo privado.</p>
+<h1>Você já sabe que fragrâncias árabes existem. O que você não sabe é quanto está pagando a mais por elas.</h1>
+<p class="hero-subtitle">Marketplaces embutem até 40% de taxa no preço. Lojas físicas repassam aluguel, funcionários e comissão. <span class="hero-destaque">A Seletto eliminou os dois caminhos.</span> Preço direto do distribuidor, sem intermediário. E sim, 100% original. Acesso restrito via grupo privado no WhatsApp.</p>
 </div>
 <div class="hero-visual fade-up">
 <div class="hero-video-wrap" id="heroVideoWrap">
@@ -413,10 +429,28 @@ body{padding-bottom:80px}
 </div>
 </div>
 </div>
-<a href="#comparativo" class="hero-micro-cta fade-up">&#8595; Descubra por que somos diferentes</a>
+<a href="#comparativo" class="hero-micro-cta fade-up">&#8595; Descubra como funciona</a>
 </div>
 </div>
 </section>
+
+<!-- ============================================ -->
+<!-- S1.5: SENSORIAL -->
+<!-- ============================================ -->
+<section class="sensorial" id="sensorial">
+<div class="container">
+<div class="sensorial-inner fade-up">
+<p class="section-label">ENTENDA ANTES DE DECIDIR</p>
+<h2>Antes de falar de preço, preciso que você entenda uma coisa.</h2>
+<p class="sensorial-corpo">As maiores grifes europeias de perfumaria não criam as próprias fragrâncias. Elas contratam perfumistas independentes para desenvolver cada composição. Esses mesmos perfumistas também trabalham para casas árabes. A química é a mesma. As notas são as mesmas. A fixação, em muitos casos, é superior. O que muda é o nome na embalagem e o preço que você paga por ele.</p>
+<p class="sensorial-corpo">Uma fragrância árabe não é uma imitação. É o trabalho do mesmo profissional, para uma casa diferente, sem o custo de uma campanha publicitária milionária.</p>
+<p class="sensorial-ruptura">Quando você entende isso, a pergunta deixa de ser "por que tão barato?" e passa a ser "por que eu pagava tão caro?".</p>
+</div>
+</div>
+</section>
+
+<!-- HOOK -->
+<div class="hook-wrap"><div class="hook fade-up">Compare lado a lado</div></div>
 
 <!-- ============================================ -->
 <!-- S2: COMPARATIVO ML vs SELETTO (CORREÇÃO 4) -->
@@ -429,26 +463,26 @@ body{padding-bottom:80px}
 </div>
 <div class="comparativo-wrapper fade-up">
 <div class="comp-col comp-col--mk">
-<p class="comp-title">MERCADO LIVRE</p>
-<div class="comp-item"><span class="comp-icon">&#10005;</span><span>Taxas de até 20% embutidas no preço</span></div>
+<p class="comp-title">MARKETPLACE / LOJA FÍSICA</p>
+<div class="comp-item"><span class="comp-icon">&#10005;</span><span>Taxa de até 40% embutida no preço (marketplace) ou aluguel, funcionários e comissão repassados pra você (loja física)</span></div>
 <div class="comp-item"><span class="comp-icon">&#10005;</span><span>Sem garantia de autenticidade do produto</span></div>
 <div class="comp-item"><span class="comp-icon">&#10005;</span><span>Atendimento genérico por chatbot</span></div>
 <div class="comp-item"><span class="comp-icon">&#10005;</span><span>Entrega padrão sem cuidado</span></div>
 <div class="comp-item"><span class="comp-icon">&#10005;</span><span>Catálogo aleatório, sem curadoria</span></div>
-<div class="comp-item"><span class="comp-icon">&#10005;</span><span>Você não sabe o que está comprando</span></div>
+<div class="comp-item"><span class="comp-icon">&#10005;</span><span>Você paga pelo perfume e pela estrutura inteira de quem vende</span></div>
 </div>
 <div class="comp-vs">VS</div>
 <div class="comp-col comp-col--sel">
 <p class="comp-title">GRUPO SELETTO</p>
-<div class="comp-item"><span class="comp-icon">&#9670;</span><span>Preço direto, zero taxa de intermediário</span></div>
+<div class="comp-item"><span class="comp-icon">&#9670;</span><span>Preço direto, sem taxa de plataforma e sem custo de estrutura física</span></div>
 <div class="comp-item"><span class="comp-icon">&#9670;</span><span>100% original. Lote validado e verificado</span></div>
 <div class="comp-item"><span class="comp-icon">&#9670;</span><span>Consultoria individual no WhatsApp</span></div>
 <div class="comp-item"><span class="comp-icon">&#9670;</span><span>Entrega premium com embalagem blindada</span></div>
 <div class="comp-item"><span class="comp-icon">&#9670;</span><span>Catálogo implacável. Só fragrâncias desejadas</span></div>
-<div class="comp-item"><span class="comp-icon">&#9670;</span><span>Você sabe exatamente o que está recebendo</span></div>
+<div class="comp-item"><span class="comp-icon">&#9670;</span><span>Você paga pelo perfume. Só pelo perfume.</span></div>
 </div>
 </div>
-<p class="comp-footer fade-up">Mesma fragrância. Experiência incomparável.</p>
+<p class="comp-footer fade-up">Mesma fragrância. Preço incomparável.</p>
 </div>
 </section>
 
@@ -463,10 +497,11 @@ body{padding-bottom:80px}
 <div class="problema-grid">
 <div class="problema-text fade-up">
 <p class="section-label">O QUE NINGUÉM TE CONTA</p>
-<h2>Você já pagou caro<br>por algo que não era<br>original.</h2>
-<p class="problema-corpo">Em marketplaces como Shopee e Mercado Livre, há pouco ou nenhum controle sobre falsificações. Essas plataformas cobram altas taxas dos vendedores (cerca de 40%) e esse custo é repassado diretamente pra você. Em lojas físicas o cenário não é melhor: aluguel, funcionários, taxa de cartão e margem do lojista inflam o preço do mesmo produto em até o dobro. O resultado: você paga mais caro por um produto que não sabe se é original.</p>
+<h2>Você não está pagando pelo perfume. Está pagando pela estrutura de quem vende.</h2>
+<p class="problema-corpo">No Mercado Livre e na Shopee, a plataforma cobra até 40% de taxa do vendedor. Esse custo vai direto pro preço que você paga. Em loja física, o cenário é parecido: aluguel do ponto, salário de funcionários, comissão do vendedor, taxa da maquininha. Tudo isso entra no preço do mesmo frasco.</p>
+<p class="problema-corpo">E tem um problema que vai além do preço: em marketplaces, há pouco ou nenhum controle sobre falsificações. Você paga mais caro por um produto que nem sabe se é original.</p>
 <p class="problema-ruptura">A Seletto Parfum nasceu para eliminar isso.</p>
-<p class="problema-corpo" style="margin-top:1rem">Trabalhamos exclusivamente com produtos originais, adquiridos de distribuidores verificados. Sem taxa de plataforma, sem intermediários, sem dúvida sobre autenticidade. O preço é menor porque o caminho até você é mais curto.</p>
+<p class="problema-corpo" style="margin-top:1rem">Trabalhamos exclusivamente com produtos originais, adquiridos de distribuidores verificados. Sem taxa de plataforma, sem custo de estrutura física. O preço é menor porque o caminho até você é mais curto.</p>
 </div>
 <div class="problema-visual fade-up">
 <div class="problema-placeholder">
@@ -497,7 +532,7 @@ body{padding-bottom:80px}
 <div class="step-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/></svg></div>
 <div class="step-num">02</div>
 <div class="step-title">ACOMPANHE OS DROPS</div>
-<div class="step-desc">Receba anúncios de novos lotes validados antes de qualquer canal.</div>
+<div class="step-desc">Receba anúncios de novos lotes validados e ofertas exclusivas para membros.</div>
 </div>
 <div class="step-card">
 <div class="step-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
@@ -568,18 +603,18 @@ body{padding-bottom:80px}
 <div class="beneficios-grid">
 <div class="benef-card fade-up">
 <div class="benef-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-<div class="benef-title">DROPS ANTES DE QUALQUER CANAL</div>
-<div class="benef-desc">Novos lotes validados? O grupo sabe primeiro. Antes do site, antes do Instagram, antes de tudo.</div>
+<div class="benef-title">DROPS EXCLUSIVOS PARA MEMBROS</div>
+<div class="benef-desc">Novos lotes validados e ofertas exclusivas disponibilizados diretamente no grupo para membros.</div>
 </div>
 <div class="benef-card fade-up">
 <div class="benef-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
 <div class="benef-title">PREÇO SEM TAXA DE MARKETPLACE</div>
-<div class="benef-desc">O valor real da fragrância, direto. Sem 20% de intermediário inflando o que você paga.</div>
+<div class="benef-desc">O valor real da fragrância, direto. Sem 40% de intermediário inflando o que você paga.</div>
 </div>
 <div class="benef-card fade-up">
 <div class="benef-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
 <div class="benef-title">CONSULTORIA INDIVIDUAL NO PRIVADO</div>
-<div class="benef-desc">Dúvidas sobre notas, fixação, ocasião? Atendimento sob medida, como um consultor faria.</div>
+<div class="benef-desc">Dúvidas sobre notas, fixação, ocasião? Atendimento sob medida, como um consultor de fragrâncias faria. Não é chatbot, não é vendedor comissionado.</div>
 </div>
 <div class="benef-card fade-up">
 <div class="benef-icon"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
@@ -596,6 +631,24 @@ body{padding-bottom:80px}
 <div class="benef-title">ENCOMENDA COLETIVA POR DEMANDA</div>
 <div class="benef-desc">O catálogo da Seletto vai além do estoque. Qualquer fragrância validada pode ser encomendada sob demanda. O grupo reúne os pedidos e o frete é dividido entre todos.</div>
 </div>
+</div>
+</div>
+</section>
+
+<!-- HOOK -->
+<div class="hook-wrap"><div class="hook fade-up">E tem mais</div></div>
+
+<!-- ============================================ -->
+<!-- S6.5: ENCOMENDA SOB DEMANDA -->
+<!-- ============================================ -->
+<section class="encomenda" id="encomenda">
+<div class="container">
+<div class="encomenda-inner fade-up">
+<p class="section-label">ENCOMENDA SOB DEMANDA</p>
+<h2>O catálogo da Seletto vai além do estoque.</h2>
+<p class="encomenda-corpo">Qualquer fragrância validada pode ser encomendada sob demanda. O grupo reúne os pedidos e o frete é dividido entre todos os membros que participam da encomenda.</p>
+<p class="encomenda-corpo">Isso significa que você não depende do que está disponível no momento. Se a fragrância existe e o distribuidor é verificado, a Seletto traz pra você. Com frete compartilhado, o custo de importação que seria proibitivo para uma pessoa sozinha se torna acessível para o grupo inteiro.</p>
+<p class="encomenda-ruptura">É o poder de compra coletivo trabalhando a seu favor.</p>
 </div>
 </div>
 </section>
@@ -661,7 +714,7 @@ body{padding-bottom:80px}
 </div>
 </div>
 <div class="ancoragem-footer">
-<p class="ancoragem-contexto">Mesma fragrância. Mesmo frasco. Sem taxa de marketplace.</p>
+<p class="ancoragem-contexto">Mesma fragrância. Mesmo frasco. Sem taxa de marketplace. Sem custo de loja física.</p>
 <p class="ancoragem-destaque">Economia de R$ 60 neste produto.</p>
 </div>
 </div>
@@ -679,7 +732,7 @@ body{padding-bottom:80px}
 <p class="vagas-sub">Restam poucas vagas</p>
 <hr class="urgencia-divider">
 <h2>O acesso é por tempo limitado.</h2>
-<p class="urgencia-corpo">Quando o grupo atingir a capacidade, o link será desativado. Sem lista de espera. Sem segunda chance.</p>
+<p class="urgencia-corpo">Quando o grupo atingir a capacidade, o link será desativado. Sem lista de espera.</p>
 <p class="urgencia-final">Se você está lendo isso, ainda há acesso.</p>
 </div>
 </div>
