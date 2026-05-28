@@ -128,17 +128,17 @@ transition:background .3s ease,box-shadow .3s ease;
 
 /* ===== S1: HERO ===== */
 .hero{min-height:100vh;min-height:100dvh;display:flex;align-items:center;padding:40px 0}
-.hero-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr auto;gap:0 3rem;width:100%}
-.hero-text{grid-column:1;grid-row:1;display:flex;flex-direction:column;justify-content:center}
-.hero-visual{grid-column:2;grid-row:1/3}
-.hero-micro-cta{grid-column:1;grid-row:2;align-self:start;margin-top:20px;color:var(--ouro);text-decoration:none;font-size:15px;font-weight:500;transition:text-decoration .2s}
+.hero-grid{display:flex;flex-direction:column;align-items:center;text-align:center;width:100%;gap:0}
+.hero-text{display:flex;flex-direction:column;align-items:center}
+.hero-visual{width:100%;display:flex;justify-content:center;margin-top:32px}
+.hero-micro-cta{margin-top:24px;color:var(--ouro);text-decoration:none;font-size:15px;font-weight:500;transition:text-decoration .2s}
 .hero-micro-cta:hover{text-decoration:underline}
 .hero-logo{width:240px;margin-bottom:32px}
-.hero h1{margin-bottom:1.2rem}
-.hero-subtitle{font-weight:400;font-size:16px;color:var(--offwhite);line-height:1.7;max-width:440px}
+.hero h1{margin-bottom:1.2rem;max-width:780px}
+.hero-subtitle{font-weight:400;font-size:16px;color:var(--offwhite);line-height:1.7;max-width:640px}
 .hero-destaque{color:var(--ouro);font-weight:600}
 .hero-video-wrap{
-width:100%;max-height:520px;aspect-ratio:9/16;border-radius:12px;overflow:hidden;
+width:100%;max-width:420px;aspect-ratio:9/16;border-radius:12px;overflow:hidden;
 box-shadow:0 8px 40px rgba(0,0,0,0.5);border:1px solid rgba(197,160,89,0.15);
 position:relative;background:#000;
 }
@@ -354,13 +354,10 @@ transition:transform .2s ease,border-color .2s ease;
 section{padding:48px 0}
 .hero{min-height:auto;padding:48px 0 32px}
 .hero{min-height:auto;padding:48px 0 32px}
-.hero-grid{display:flex;flex-direction:column;gap:0}
-.hero-text{align-items:center;text-align:center}
 .hero-logo{width:180px;margin-bottom:24px}
-.hero-subtitle{max-width:100%;margin-bottom:24px}
-.hero-visual{width:80%;margin:0 auto 24px;display:flex;justify-content:center}
-.hero-video-wrap{max-height:480px}
-.hero-micro-cta{text-align:center}
+.hero-subtitle{max-width:100%}
+.hero-visual{padding:0 20px;margin-top:24px}
+.hero-video-wrap{max-width:none}
 .comparativo-wrapper{flex-direction:column;gap:0}
 .comp-vs{
 position:relative;top:auto;left:auto;
