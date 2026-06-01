@@ -1,0 +1,41 @@
+/* ============================================ */
+/* LP2.CSS - Estilos exclusivos da LP2            */
+/* ============================================ */
+
+/* ===== OS SINAIS (lista vertical com ◆) ===== */
+.sinais-list{
+list-style:none;padding:0;margin:0;
+display:flex;flex-direction:column;gap:1.25rem;
+}
+.sinais-list li{
+display:flex;align-items:flex-start;gap:.75rem;
+font-size:16px;font-weight:400;color:var(--offwhite);line-height:1.7;
+padding-left:0;
+}
+.sinais-list li::before{
+content:'◆';
+color:var(--ouro);font-weight:700;
+flex-shrink:0;font-size:14px;
+margin-top:4px;
+}
+
+/* ===== ANCORAGEM 3 FAIXAS (LP2) ===== */
+.ancoragem-wrap--triple{max-width:1100px}
+.ancoragem-cards--triple{display:flex;gap:20px;justify-content:center;align-items:stretch}
+.ancoragem-cards--triple .ancoragem-card{flex:1;max-width:360px;display:flex;flex-direction:column;justify-content:space-between;padding:28px 24px}
+.ancoragem-card--middle{
+background:rgba(240,239,234,0.04);
+border:1px solid rgba(240,239,234,0.12);
+}
+.ancoragem-col-tag--middle{color:rgba(240,239,234,0.6)}
+.ancoragem-preco--middle{font-weight:400;color:var(--offwhite)}
+.ancoragem-sub{font-size:12px;font-weight:400;color:var(--cinza-apagado);line-height:1.5;margin-top:10px}
+.ancoragem-card--new.ancoragem-card--winner{
+border-width:2px;
+box-shadow:0 0 40px rgba(197,160,89,0.12);
+}
+
+@media(max-width:768px){
+.ancoragem-cards--triple{flex-direction:column;gap:16px}
+.ancoragem-cards--triple .ancoragem-card{max-width:100%}
+}
