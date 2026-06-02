@@ -39,3 +39,31 @@ box-shadow:0 0 40px rgba(197,160,89,0.12);
 .ancoragem-cards--triple{flex-direction:column;gap:16px}
 .ancoragem-cards--triple .ancoragem-card{max-width:100%}
 }
+
+/* ===== PLACEHOLDERS DE IMAGEM ===== */
+.img-placeholder{
+width:100%;background:#1a1a1a;border:1px solid rgba(197,160,89,0.1);
+border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+gap:12px;padding:24px;text-align:center;
+}
+.img-placeholder svg{width:32px;height:32px;stroke:rgba(240,239,234,0.25);fill:none;stroke-width:1.5}
+.img-placeholder-text{
+font-size:11px;font-weight:500;color:rgba(240,239,234,0.5);
+text-transform:uppercase;letter-spacing:1.5px;line-height:1.5;
+max-width:480px;
+}
+
+.img-placeholder--inline{
+margin:2rem auto;max-width:700px;aspect-ratio:16/9;
+}
+
+.img-placeholder-group{
+margin:2rem auto;max-width:900px;
+display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+}
+.img-placeholder-group .img-placeholder{aspect-ratio:9/16}
+
+@media(max-width:768px){
+.img-placeholder-group{grid-template-columns:1fr;gap:12px;max-width:280px}
+.img-placeholder-group .img-placeholder{aspect-ratio:9/16}
+}
