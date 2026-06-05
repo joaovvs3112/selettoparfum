@@ -1,0 +1,111 @@
+/* ============================================ */
+/* LP3.CSS - Estilos exclusivos da LP3 (Grande Vitória) */
+/* ============================================ */
+
+/* ===== COMPARATIVO TIMELINE ===== */
+.timeline-section{padding:60px 0}
+.timeline-header{text-align:center;margin-bottom:2.5rem}
+.timeline-wrapper{
+display:flex;align-items:stretch;gap:0;position:relative;
+}
+.timeline-col{flex:1;padding:2rem;position:relative}
+.timeline-col--mk{
+background:rgba(92,32,32,0.10);
+border:1px solid rgba(92,32,32,0.25);
+}
+.timeline-col--sel{
+background:rgba(197,160,89,0.10);
+border:1px solid rgba(197,160,89,0.35);
+box-shadow:0 0 30px rgba(197,160,89,0.06);
+}
+.timeline-title{
+font-size:14px;font-weight:700;text-transform:uppercase;
+letter-spacing:2px;margin-bottom:1.5rem;padding-bottom:.75rem;
+border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.timeline-col--mk .timeline-title{color:rgba(240,239,234,0.35)}
+.timeline-col--sel .timeline-title{color:var(--ouro)}
+
+.timeline-steps{display:flex;flex-direction:column;gap:1.25rem}
+.timeline-step{
+display:flex;gap:14px;font-size:14px;line-height:1.6;
+position:relative;padding-left:0;
+}
+.timeline-step-dot{
+flex-shrink:0;width:10px;height:10px;border-radius:50%;
+margin-top:7px;position:relative;z-index:2;
+}
+.timeline-col--mk .timeline-step{color:var(--cinza-apagado)}
+.timeline-col--mk .timeline-step-dot{background:#8B3A3A}
+.timeline-col--sel .timeline-step{color:var(--offwhite)}
+.timeline-col--sel .timeline-step-dot{background:var(--ouro);box-shadow:0 0 12px rgba(197,160,89,0.5)}
+.timeline-step-day{
+font-size:11px;text-transform:uppercase;letter-spacing:2px;font-weight:700;
+display:block;margin-bottom:4px;
+}
+.timeline-col--mk .timeline-step-day{color:rgba(240,239,234,0.4)}
+.timeline-col--sel .timeline-step-day{color:var(--ouro)}
+.timeline-step-text{font-size:14px;line-height:1.6}
+/* linha conectora vertical para etapas múltiplas */
+.timeline-step:not(:last-child)::before{
+content:'';position:absolute;left:4px;top:24px;
+height:calc(100% + 1.25rem - 14px);width:2px;
+background:rgba(139,58,58,0.25);
+z-index:1;
+}
+.timeline-col--sel .timeline-step:not(:last-child)::before{background:rgba(197,160,89,0.25)}
+
+.timeline-extra{
+margin-top:1.5rem;padding-top:1.25rem;
+border-top:1px solid rgba(255,255,255,0.06);
+font-size:13px;line-height:1.7;
+}
+.timeline-col--mk .timeline-extra{color:var(--cinza-apagado);font-style:italic}
+.timeline-col--sel .timeline-extra{color:var(--offwhite)}
+.timeline-col--sel .timeline-extra p{margin-bottom:6px}
+.timeline-col--sel .timeline-extra p:last-child{margin-bottom:0}
+
+.timeline-vs{
+position:absolute;top:50%;left:50%;
+transform:translate(-50%,-50%);
+width:56px;height:56px;border-radius:50%;
+background:var(--ouro);
+display:flex;align-items:center;justify-content:center;
+font-size:16px;font-weight:800;color:var(--preto);
+box-shadow:0 0 20px rgba(197,160,89,0.3);
+z-index:10;
+}
+
+.timeline-footer{
+text-align:center;margin-top:2rem;
+font-style:italic;font-weight:500;color:var(--ouro);font-size:18px;
+}
+
+/* ===== COBERTURA ===== */
+.cobertura{padding:80px 0}
+.cobertura-inner{max-width:640px;margin:0 auto;text-align:center}
+.cobertura-inner .section-label{margin-bottom:1.2rem}
+.cobertura-inner h2{margin-bottom:2rem}
+.cobertura-grid{
+display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;
+max-width:440px;margin:0 auto 1.5rem;
+}
+.cobertura-item{
+font-size:17px;font-weight:600;color:var(--offwhite);
+display:flex;align-items:center;justify-content:center;gap:10px;
+padding:18px;background:var(--ouro-soft);
+border:1px solid rgba(197,160,89,0.2);border-radius:4px;
+letter-spacing:0.5px;
+}
+.cobertura-item::before{content:'◆';color:var(--ouro);font-size:14px}
+.cobertura-nota{font-size:14px;color:var(--cinza-apagado);margin-top:1rem}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+.timeline-wrapper{flex-direction:column;gap:0}
+.timeline-vs{
+position:relative;top:auto;left:auto;
+transform:none;margin:-20px auto;
+}
+.cobertura-grid{grid-template-columns:1fr;max-width:300px}
+}
