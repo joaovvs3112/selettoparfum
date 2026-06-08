@@ -100,33 +100,6 @@ letter-spacing:0.5px;
 .cobertura-item::before{content:'◆';color:var(--ouro);font-size:14px}
 .cobertura-nota{font-size:14px;color:var(--cinza-apagado);margin-top:1rem}
 
-/* ===== MAPA DA GRANDE VITÓRIA ===== */
-.cobertura-mapa{
-width:100%;max-width:520px;margin:0 auto 2rem;
-display:block;
-}
-.cobertura-mapa svg{width:100%;height:auto;display:block}
-.cobertura-mapa .mapa-cidade{
-fill:rgba(197,160,89,0.12);
-stroke:var(--ouro);
-stroke-width:1.5;
-transition:fill .3s ease;
-}
-.cobertura-mapa .mapa-cidade--vitoria{fill:rgba(197,160,89,0.22)}
-.cobertura-mapa .mapa-label{
-fill:var(--ouro);
-font-family:var(--font-body);
-font-weight:700;
-letter-spacing:1px;
-font-size:14px;
-text-anchor:middle;
-}
-.cobertura-mapa .mapa-bay{
-fill:rgba(197,160,89,0.03);
-stroke:rgba(197,160,89,0.08);
-stroke-width:1;
-}
-
 /* ===== CATÁLOGO CARROSSEL ===== */
 .catalogo-carousel-wrap{position:relative;max-width:1000px;margin:0 auto 2rem;overflow:hidden}
 .catalogo-carousel-track{
@@ -159,6 +132,22 @@ border:none;padding:0;transition:opacity .3s ease;
 }
 .catalogo-carousel-dot.active{opacity:1}
 
+/* ===== PLACEHOLDER DE IMAGEM ===== */
+.img-placeholder{
+width:100%;background:#1a1a1a;border:1px solid rgba(197,160,89,0.1);
+border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+gap:12px;padding:24px;text-align:center;
+}
+.img-placeholder svg{width:32px;height:32px;stroke:rgba(240,239,234,0.25);fill:none;stroke-width:1.5}
+.img-placeholder-text{
+font-size:11px;font-weight:500;color:rgba(240,239,234,0.5);
+text-transform:uppercase;letter-spacing:1.5px;line-height:1.5;
+max-width:480px;
+}
+.img-placeholder--inline{
+margin:2rem auto;max-width:600px;aspect-ratio:16/9;
+}
+
 /* ===== INLINE CTA BLOCK ===== */
 .inline-cta-block{
 text-align:center;padding:48px 24px;max-width:600px;margin:0 auto;
@@ -174,7 +163,6 @@ position:relative;top:auto;left:auto;
 transform:none;margin:-20px auto;
 }
 .cobertura-grid{grid-template-columns:1fr;max-width:300px}
-.cobertura-mapa{max-width:100%}
 .catalogo-carousel-track .catalogo-card{
 flex:0 0 calc(100% - 24px);
 max-width:calc(100% - 24px);
