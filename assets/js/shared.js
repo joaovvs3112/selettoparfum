@@ -1,4 +1,10 @@
 (function(){
+  // Meta Pixel — Contact event em qualquer clique em link do WhatsApp
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href*="chat.whatsapp.com"]');
+    if(a&&typeof fbq==='function'){fbq('track','Contact')}
+  },{passive:true});
+
   // Fade-up observer
   var fadeObs=new IntersectionObserver(function(entries){
     entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible')});
