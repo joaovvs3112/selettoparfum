@@ -148,6 +148,13 @@ max-width:480px;
 margin:2rem auto;max-width:600px;aspect-ratio:16/9;
 }
 
+/* ===== HERO CTA (abaixo do vídeo) ===== */
+.hero-cta{
+text-align:center;margin-top:32px;
+display:flex;flex-direction:column;align-items:center;gap:12px;
+}
+.hero-cta .cta-sub{margin-top:0}
+
 /* ===== INLINE CTA BLOCK ===== */
 .inline-cta-block{
 text-align:center;padding:48px 24px;max-width:600px;margin:0 auto;
