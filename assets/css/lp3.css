@@ -148,14 +148,14 @@ max-width:480px;
 margin:2rem auto;max-width:600px;aspect-ratio:16/9;
 }
 
-/* Foto real dentro de seção (sem forçar aspect-ratio) */
+/* Foto real dentro de seção (mesmo tamanho do placeholder) */
 .section-photo{
-margin:2rem auto 0;max-width:600px;
+margin:2rem auto 0;max-width:600px;aspect-ratio:16/9;
 border-radius:8px;overflow:hidden;
 border:1px solid rgba(197,160,89,0.15);
 box-shadow:0 8px 32px rgba(0,0,0,0.4);
 }
-.section-photo img{width:100%;height:auto;display:block}
+.section-photo img{width:100%;height:100%;object-fit:cover;display:block}
 
 /* ===== HERO CTA (abaixo do vídeo) ===== */
 .hero-cta{
