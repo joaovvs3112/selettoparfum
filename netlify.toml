@@ -1,6 +1,13 @@
 [build]
   publish = "."
 
+# URLs canônicas sem .html
+[[redirects]]
+  from = "/interior.html"
+  to = "/interior"
+  status = 301
+  force = true
+
 # Cache estendido para assets versionáveis
 [[headers]]
   for = "/assets/css/*"
