@@ -443,16 +443,17 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 }
 .vit-card__img-wrap {
   aspect-ratio: 1 / 1;
-  background: var(--gray-100);
+  background: var(--gray-100);        /* fundo neutro para fotos com fundo branco */
   border: 1px solid var(--gray-50);
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 8px;                        /* respiro para o frasco não encostar na borda */
 }
 .vit-card__img {
   width: 100%; height: 100%;
-  object-fit: cover;
+  object-fit: contain;                 /* nunca corta o frasco */
   filter: grayscale(1);
   transition: filter .4s ease, transform .4s ease;
 }
@@ -831,10 +832,32 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
     --sec-pad-y: 80px;             /* antes era 128 */
   }
 
-  /* Hero: 2 colunas · texto esquerda · VSL direita */
-  .hero__body { grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: start; }
-  .hero__text-col > .hero__trust { margin-top: 32px; }
-  .vsl { max-width: 360px; max-height: none; aspect-ratio: 9/16; }
+  /* Hero: 2 colunas no topo (texto · visual) + linha de confiança abaixo
+     ocupando toda a largura. Com VSL_ATIVA=false, a coluna direita
+     recebe os benefícios em 2x2 (ninguém fica vazio). */
+  .hero__body {
+    grid-template-columns: 1.1fr .9fr;
+    grid-template-areas:
+      "text visual"
+      "trust trust";
+    gap: 32px 56px;
+    align-items: start;
+  }
+  .hero__text-col   { grid-area: text; }
+  .hero__visual-col { grid-area: visual; align-self: start; }
+  .hero__trust      { grid-area: trust; margin-top: 8px; padding-top: 20px; }
+
+  /* Benefícios voltam a 2x2 na coluna direita (sobrescreve 4 col do tablet) */
+  .benefits-strip {
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+    gap: 24px;
+  }
+
+  /* VSL (quando ativa) ocupa a coluna visual */
+  .vsl { max-width: 360px; max-height: none; aspect-ratio: 9/16; margin: 0; }
 
   /* Seção 01: título esquerda · texto+comparativo direita */
   .escuro-grid { grid-template-columns: 1fr 1.3fr; gap: 56px; align-items: start; }
@@ -864,6 +887,9 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   /* FAQ e Cashback em layout 2 col onde fizer sentido */
   .cash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
 
+  /* Prints do grupo: cards maiores no desktop */
+  .chats__item { flex: 0 0 260px; }
+
   /* Barra fixa some no desktop */
   .sticky-cta { display: none !important; }
 
@@ -889,7 +915,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   </div>
 
   <div class="hero__body">
-    <!-- Coluna esquerda: texto + CTA + benefícios -->
+    <!-- Coluna texto · esquerda no desktop · topo no mobile -->
     <div class="hero__text-col">
       <p class="hero__tag">SELETTO DECANTS · GRANDE VITÓRIA</p>
       <h1 class="h-serif hero__title">
@@ -901,36 +927,12 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
       </p>
 
       <!--
-        VSL ·
-        Troque o arquivo em  /assets/videos/decants-vsl.mp4
-        E a capa em          /assets/images/misc/decants-vsl-poster.jpg
-
-        Comportamento:
-          · começa autoplay muted + loop (loop ativo só enquanto mudo)
-          · "TOQUE PARA OUVIR" visível
-          · primeiro toque: ativa som, reinicia (currentTime=0),
-            remove loop, mostra controles nativos, dispara fbq VSLPlay
-
-        Fallbacks:
-          · se o vídeo falhar: exibe só o poster
-          · se o poster também falhar: esconde o bloco inteiro
+        VSL slot vazio ·
+        Fica vazio enquanto VSL_ATIVA = false no script (sem markup,
+        sem CSS que ocupe espaço, sem requisição ao MP4 ou ao poster).
+        Quando trocar para true, o JS injeta a VSL aqui dentro.
       -->
-      <div class="vsl" id="vsl" aria-label="Vídeo de apresentação da Seletto Decants">
-        <img class="vsl__poster" id="vslPoster" src="/assets/images/misc/decants-vsl-poster.jpg" alt="Capa do vídeo da Seletto Decants" loading="lazy">
-        <video
-          class="vsl__video" id="vslVideo"
-          poster="/assets/images/misc/decants-vsl-poster.jpg"
-          autoplay muted loop playsinline preload="metadata"
-          aria-hidden="true">
-          <source src="/assets/videos/decants-vsl.mp4" type="video/mp4">
-        </video>
-        <span class="vsl__badge" id="vslBadge">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M3 10v4a1 1 0 001 1h3l5 4V5L7 9H4a1 1 0 00-1 1zm13.5 2a4.5 4.5 0 00-2.5-4v8a4.5 4.5 0 002.5-4z"/>
-          </svg>
-          Toque para ouvir
-        </span>
-      </div>
+      <div id="vslSlot"></div>
 
       <div class="hero__cta">
         <a href="#" data-cta class="btn btn--primary">
@@ -941,8 +943,12 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
         </a>
         <p class="btn-note">Entrar é grátis. Você sai quando quiser.</p>
       </div>
+    </div>
 
-      <!-- Faixa de benefícios: 4 argumentos em 2x2 (mobile) / 4col (desktop) -->
+    <!-- Coluna visual · direita no desktop · abaixo do CTA no mobile.
+         Quando a VSL estiver ativa, a lógica desktop pode promover a VSL
+         para esta coluna. Enquanto desligada, só os benefícios ocupam o espaço. -->
+    <aside class="hero__visual-col">
       <div class="benefits-strip">
         <div class="benefit">
           <div class="benefit__big">Original</div>
@@ -961,11 +967,12 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
           <div class="benefit__line">Do decant volta no frasco</div>
         </div>
       </div>
+    </aside>
 
-      <div class="hero__trust">
-        <span class="hero__trust-stars">★★★★★</span>
-        <span>5,0 no Google · Centenas de clientes atendidos pela Seletto Parfum</span>
-      </div>
+    <!-- Linha de confiança · ocupa a largura toda no desktop (abaixo das 2 colunas) -->
+    <div class="hero__trust">
+      <span class="hero__trust-stars">★★★★★</span>
+      <span>5,0 no Google · Centenas de clientes atendidos pela Seletto Parfum</span>
     </div>
   </div>
 </section>
@@ -994,7 +1001,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
         <div class="compare">
           <div class="compare__row">
             <span class="compare__label">Frasco de 100ml que você nunca sentiu</span>
-            <span class="compare__value compare__value--muted">R$ 200+</span>
+            <span class="compare__value compare__value--muted">R$ 300+</span>
           </div>
           <div class="compare__row">
             <span class="compare__label">Decant de 5ml do mesmo perfume</span>
@@ -1088,11 +1095,12 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 
     <!-- Carrossel horizontal mobile (scroll-snap) · grade 4 col no desktop -->
     <div class="vitrine">
-      <!-- Club de Nuit Elite · sem foto no projeto · placeholder "C" -->
       <article class="vit-card">
-        <div class="vit-card__img-wrap"><span class="vit-card__placeholder">C</span></div>
+        <div class="vit-card__img-wrap">
+          <img class="vit-card__img" data-fallback="C" src="/assets/images/products/Armaf%20-%20Club%20de%20Nuit%20Elite.jpg" alt="Decant de Club de Nuit Elite da Armaf" loading="lazy">
+        </div>
         <p class="vit-card__name">Club de Nuit Elite</p>
-        <p class="vit-card__brand">&nbsp;</p>
+        <p class="vit-card__brand">Armaf</p>
       </article>
 
       <article class="vit-card">
@@ -1127,18 +1135,20 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
         <p class="vit-card__brand">Rayhaan</p>
       </article>
 
-      <!-- Hawas Kobra · sem foto no projeto · placeholder "H" -->
       <article class="vit-card">
-        <div class="vit-card__img-wrap"><span class="vit-card__placeholder">H</span></div>
+        <div class="vit-card__img-wrap">
+          <img class="vit-card__img" data-fallback="H" src="/assets/images/products/Rasasi%20-%20Hawas%20Kobra.jpg" alt="Decant de Hawas Kobra da Rasasi" loading="lazy">
+        </div>
         <p class="vit-card__name">Hawas Kobra</p>
-        <p class="vit-card__brand">&nbsp;</p>
+        <p class="vit-card__brand">Rasasi</p>
       </article>
 
-      <!-- Maahir Honor · sem foto no projeto · placeholder "M" -->
       <article class="vit-card">
-        <div class="vit-card__img-wrap"><span class="vit-card__placeholder">M</span></div>
+        <div class="vit-card__img-wrap">
+          <img class="vit-card__img" data-fallback="M" src="/assets/images/products/Lattafa%20-%20Maahir%20Honor.jpg" alt="Decant de Maahir Honor da Lattafa" loading="lazy">
+        </div>
         <p class="vit-card__name">Maahir Honor</p>
-        <p class="vit-card__brand">&nbsp;</p>
+        <p class="vit-card__brand">Lattafa</p>
       </article>
 
       <article class="vit-card">
@@ -1288,17 +1298,16 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
       </article>
     </div>
 
-    <!-- Prints reais do WhatsApp (grayscale)
-         Error handler no JS esconde qualquer item que falhe em carregar -->
+    <!-- Prints reais do GRUPO DE DECANTS (verticais 591x1280, grayscale).
+         Error handler no JS esconde qualquer item que falhe em carregar. -->
     <div class="chats">
-      <p class="chats__label">Conversas reais no WhatsApp</p>
+      <p class="chats__label">Conversas reais no grupo de decants</p>
       <div class="chats__track" id="chatsTrack">
-        <div class="chats__item"><img src="/assets/images/testimonials/whatsapp_chat_4.png"  alt="Conversa com cliente sobre coleção de fragrâncias" loading="lazy"></div>
-        <div class="chats__item"><img src="/assets/images/testimonials/whatsapp_chat_10.png" alt="Conversa com cliente"                               loading="lazy"></div>
-        <div class="chats__item"><img src="/assets/images/testimonials/whatsapp_chat_8.png"  alt="Conversa com cliente sobre atendimento"             loading="lazy"></div>
-        <div class="chats__item"><img src="/assets/images/testimonials/whatsapp_chat_11.png" alt="Conversa com cliente"                               loading="lazy"></div>
-        <div class="chats__item"><img src="/assets/images/testimonials/whatsapp_chat_5.png"  alt="Conversa com cliente sobre fragrância"              loading="lazy"></div>
-        <div class="chats__item"><img src="/assets/images/testimonials/whatsapp_chat_13.png" alt="Conversa com cliente"                               loading="lazy"></div>
+        <div class="chats__item"><img src="/assets/images/testimonials/decants/decants_feedback_1.jpg" alt="Membros do grupo elogiando a fixação dos decants" loading="lazy"></div>
+        <div class="chats__item"><img src="/assets/images/testimonials/decants/decants_feedback_2.jpg" alt="Membro recomendando o Pacific Aura no grupo"       loading="lazy"></div>
+        <div class="chats__item"><img src="/assets/images/testimonials/decants/decants_enquete.jpg"    alt="Enquete do grupo para escolher o próximo perfume"  loading="lazy"></div>
+        <div class="chats__item"><img src="/assets/images/testimonials/decants/decants_abertura.jpg"   alt="Vídeo da abertura do frasco postado no grupo"      loading="lazy"></div>
+        <div class="chats__item"><img src="/assets/images/testimonials/decants/decants_lista.jpg"      alt="Lista do dia com perfumes e preços no grupo"       loading="lazy"></div>
       </div>
     </div>
 
@@ -1377,30 +1386,44 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
    1. GRUPO_VIP: link único centralizado. Troque aqui quando
       o grupo atual lotar (limite WhatsApp: 1024 membros).
 
-   2. Aplica em todos os botões [data-cta] + dispara Lead no
+   2. VSL_ATIVA: liga/desliga o vídeo do hero.
+      · false → nenhum markup, zero requisição ao MP4 e ao poster
+      · true  → injeta a VSL via JS entre subtítulo e CTA
+
+      Troque para true quando enviar os arquivos:
+        /assets/videos/decants-vsl.mp4
+        /assets/images/misc/decants-vsl-poster.jpg
+
+   3. Aplica em todos os botões [data-cta] + dispara Lead no
       Meta Pixel ao clicar (protegido com if(window.fbq)).
 
-   3. VSL (vídeo do hero):
+   4. VSL (quando ativa):
       · Começa autoplay muted + loop (loop só enquanto mudo)
-      · Primeiro toque: ativa som, reinicia (currentTime=0),
-        remove loop, mostra controles e dispara VSLPlay
-      · Fallback: se o vídeo falhar, mostra só o poster.
-        Se o poster também falhar, esconde o bloco inteiro.
+      · Primeiro toque: ativa som, reinicia, remove loop,
+        mostra controles e dispara VSLPlay
+      · Fallback: se o vídeo falhar, mostra só o poster;
+        se o poster também falhar, esconde o bloco inteiro.
 
-   4. Error handler nas imagens: qualquer <img> que falhe
-      remove o próprio card/item (sem placeholder visível).
+   5. Error handler nas imagens:
+      · prints do WhatsApp (.chats__item): removem o item
+      · vitrine (.vit-card img): a imagem vira a inicial
+        (data-fallback) sem apagar o card.
 
-   5. Barra fixa mobile: aparece quando o hero sai da tela.
+   6. Barra fixa mobile: aparece quando o hero sai da tela.
 
-   6. Fade-in das seções via IntersectionObserver,
+   7. Fade-in das seções via IntersectionObserver,
       desligado com prefers-reduced-motion.
    ============================================================ */
 (function(){
 
   // 1) LINK DO GRUPO VIP · TROCAR AQUI QUANDO O ATUAL LOTAR
-  var GRUPO_VIP = 'https://chat.whatsapp.com/SEU-LINK-DO-GRUPO-DE-DECANTS';
+  var GRUPO_VIP = 'https://chat.whatsapp.com/DbHDcUefDPBGwZFCW1Bs40';
 
-  // 2) Aplica em todos os CTAs + dispara Lead
+  // 2) VSL · liga/desliga centralizado
+  //    false enquanto o vídeo e a capa ainda não estão no projeto.
+  var VSL_ATIVA = false;
+
+  // 3) Aplica em todos os CTAs + dispara Lead
   document.querySelectorAll('[data-cta]').forEach(function(el){
     el.setAttribute('href', GRUPO_VIP);
     el.setAttribute('target', '_blank');
@@ -1415,79 +1438,78 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   }, { passive: true });
 
 
-  // 3) VSL · controle de som + eventos + fallbacks
-  var vsl = document.getElementById('vsl');
-  var video = document.getElementById('vslVideo');
-  var poster = document.getElementById('vslPoster');
-  var badge = document.getElementById('vslBadge');
+  // 4) VSL · injetada no DOM só quando VSL_ATIVA = true
+  //    Assim o navegador não baixa o MP4 nem a capa enquanto desligada.
+  if (VSL_ATIVA) {
+    var slot = document.getElementById('vslSlot');
+    if (slot) {
+      slot.innerHTML =
+        '<div class="vsl" id="vsl" aria-label="Vídeo de apresentação da Seletto Decants">' +
+          '<img class="vsl__poster" id="vslPoster" src="/assets/images/misc/decants-vsl-poster.jpg" alt="Capa do vídeo da Seletto Decants" loading="lazy">' +
+          '<video class="vsl__video" id="vslVideo" poster="/assets/images/misc/decants-vsl-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true">' +
+            '<source src="/assets/videos/decants-vsl.mp4" type="video/mp4">' +
+          '</video>' +
+          '<span class="vsl__badge" id="vslBadge">' +
+            '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 10v4a1 1 0 001 1h3l5 4V5L7 9H4a1 1 0 00-1 1zm13.5 2a4.5 4.5 0 00-2.5-4v8a4.5 4.5 0 002.5-4z"/></svg>' +
+            ' Toque para ouvir' +
+          '</span>' +
+        '</div>';
 
-  if (vsl && video && poster) {
+      var vsl    = document.getElementById('vsl');
+      var video  = document.getElementById('vslVideo');
+      var poster = document.getElementById('vslPoster');
+      var badge  = document.getElementById('vslBadge');
 
-    // Esconde a imagem de poster assim que o vídeo tiver os primeiros frames
-    video.addEventListener('loadeddata', function(){
-      poster.style.opacity = 0;
-    }, { once: true });
+      // Esconde o poster quando o vídeo tem os primeiros frames
+      video.addEventListener('loadeddata', function(){
+        poster.style.opacity = 0;
+      }, { once: true });
 
-    // Clique ou toque: liga som, reinicia, remove loop, mostra controles
-    var activated = false;
-    function activateSound(){
-      if (activated) return;
-      activated = true;
-      try {
-        video.muted = false;
-        video.loop = false;
-        video.currentTime = 0;
-        video.controls = true;
-        var playPromise = video.play();
-        if (playPromise && playPromise.catch) {
-          playPromise.catch(function(){ /* silencioso */ });
-        }
-        vsl.classList.add('is-sound-on');
-        if (window.fbq) fbq('trackCustom', 'VSLPlay');
-      } catch(err){ /* fail silencioso */ }
-    }
-    vsl.addEventListener('click', activateSound);
-
-    // Fallback em cascata:
-    //   · vídeo falha  → esconde o <video> (fica só o poster)
-    //   · poster falha → se o vídeo também falhou, esconde o bloco todo
-    var videoFailed = false, posterFailed = false;
-    function checkHide(){
-      if (videoFailed && posterFailed) {
-        vsl.classList.add('hidden');
+      // Primeiro toque: liga som, reinicia, remove loop, mostra controles
+      var activated = false;
+      function activateSound(){
+        if (activated) return;
+        activated = true;
+        try {
+          video.muted = false;
+          video.loop = false;
+          video.currentTime = 0;
+          video.controls = true;
+          var p = video.play();
+          if (p && p.catch) p.catch(function(){});
+          vsl.classList.add('is-sound-on');
+          if (window.fbq) fbq('trackCustom', 'VSLPlay');
+        } catch(err){}
       }
+      vsl.addEventListener('click', activateSound);
+
+      // Fallback em cascata
+      var videoFailed = false, posterFailed = false;
+      function checkHide(){ if (videoFailed && posterFailed) vsl.classList.add('hidden'); }
+      video.addEventListener('error', function(){ videoFailed = true; video.style.display = 'none'; badge.style.display = 'none'; checkHide(); });
+      var src = video.querySelector('source');
+      if (src) src.addEventListener('error', function(){ videoFailed = true; video.style.display = 'none'; badge.style.display = 'none'; checkHide(); });
+      poster.addEventListener('error', function(){ posterFailed = true; poster.style.display = 'none'; checkHide(); });
     }
-    video.addEventListener('error', function(){
-      videoFailed = true;
-      video.style.display = 'none';
-      badge.style.display = 'none';
-      checkHide();
-    });
-    var src = video.querySelector('source');
-    if (src) {
-      src.addEventListener('error', function(){
-        videoFailed = true;
-        video.style.display = 'none';
-        badge.style.display = 'none';
-        checkHide();
-      });
-    }
-    poster.addEventListener('error', function(){
-      posterFailed = true;
-      poster.style.display = 'none';
-      checkHide();
-    });
   }
 
 
-  // 4) Error handler em todas as imagens: se falhar, remove o card inteiro
-  document.querySelectorAll('img').forEach(function(img){
+  // 5) Error handler em imagens
+  //    · vitrine (.vit-card img) → vira inicial sem apagar o card
+  //    · prints (.chats__item img) → remove o item inteiro
+  document.querySelectorAll('.vit-card img').forEach(function(img){
     img.addEventListener('error', function(){
-      // Procura o card/item mais próximo para remover sem deixar vazio
-      var holder = img.closest('.chats__item, .vit-card, .section-photo');
-      if (holder && holder.parentNode) {
-        holder.parentNode.removeChild(holder);
+      var initial = img.getAttribute('data-fallback') || '?';
+      var wrap = img.closest('.vit-card__img-wrap');
+      if (wrap) {
+        wrap.innerHTML = '<span class="vit-card__placeholder">' + initial + '</span>';
       }
+    });
+  });
+  document.querySelectorAll('.chats__item img').forEach(function(img){
+    img.addEventListener('error', function(){
+      var holder = img.closest('.chats__item');
+      if (holder && holder.parentNode) holder.parentNode.removeChild(holder);
     });
   });
 
