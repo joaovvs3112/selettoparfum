@@ -1,6 +1,14 @@
 [build]
   publish = "."
 
+# Netlify Functions (Node 20) · evento Lead CAPI para o Meta
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[functions."capi-lead"]
+  node_version = "20"
+
 # URLs canônicas sem .html
 [[redirects]]
   from = "/interior.html"

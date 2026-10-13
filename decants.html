@@ -1423,19 +1423,91 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   //    false enquanto o vídeo e a capa ainda não estão no projeto.
   var VSL_ATIVA = false;
 
-  // 3) Aplica em todos os CTAs + dispara Lead
+  // 3) Aplica o link em todos os CTAs
   document.querySelectorAll('[data-cta]').forEach(function(el){
     el.setAttribute('href', GRUPO_VIP);
     el.setAttribute('target', '_blank');
     el.setAttribute('rel', 'noopener');
   });
+
+  /* ---------- Utilidades para tracking de Lead ---------- */
+  // Gera eventID único por clique. Usado tanto no fbq (browser)
+  // quanto na CAPI (server). Mesma string = Meta deduplica.
+  function newEventID(){
+    return 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2,10);
+  }
+  function getCookie(name){
+    var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]+)'));
+    return m ? decodeURIComponent(m[1]) : null;
+  }
+  function getQueryParam(name){
+    try { return new URL(location.href).searchParams.get(name); } catch(e){ return null; }
+  }
+  // _fbc: cookie oficial do Meta Pixel criado quando a página recebe ?fbclid=...
+  // Se o cookie não existe mas o fbclid está na URL, construímos no formato oficial.
+  function buildFbc(){
+    var fbc = getCookie('_fbc');
+    if (fbc) return fbc;
+    var fbclid = getQueryParam('fbclid');
+    if (fbclid) return 'fb.1.' + Date.now() + '.' + fbclid;
+    return null;
+  }
+
+  /* ---------- Click handler com dedup Pixel + CAPI ---------- */
+  // Mudanças vs. versão anterior:
+  //   1. preventDefault + setTimeout(150ms) + window.open — garante
+  //      que o beacon do Pixel sai ANTES do navegador abrir o WhatsApp.
+  //      (resolvia o problema de in-app browser / Safari fechar a aba).
+  //   2. eventID único: Pixel browser e CAPI server mandam o mesmo
+  //      event_id. Meta deduplica, não conta dobrado.
+  //   3. POST não bloqueante para /.netlify/functions/capi-lead com
+  //      _fbp + _fbc + user_agent. A Function envia pro Graph API.
+  //
+  // Precisa das env vars na Netlify:
+  //   META_CAPI_ACCESS_TOKEN  (gerado no Events Manager → Pixel → CAPI)
+  //   META_PIXEL_ID = 955834414180825 (opcional, tem fallback)
+  //   META_CAPI_TEST_CODE (opcional, para testar com TEST####)
   document.addEventListener('click', function(e){
     var link = e.target.closest && e.target.closest('[data-cta]');
     if(!link) return;
-    if(window.fbq){
-      fbq('track', 'Lead', { content_name: 'Grupo VIP Decants' });
+
+    // Modificadores: deixa o navegador tratar (abrir em outra aba manual, etc.)
+    if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) return;
+
+    e.preventDefault();
+    var url = link.href;
+    var eventId = newEventID();
+
+    // (a) Pixel · browser-side
+    if (window.fbq) {
+      fbq('track', 'Lead', { content_name: 'Grupo VIP Decants' }, { eventID: eventId });
     }
-  }, { passive: true });
+
+    // (b) CAPI · server-side (dedup pelo mesmo eventId)
+    try {
+      var payload = JSON.stringify({
+        event_id: eventId,
+        event_source_url: location.href,
+        fbp: getCookie('_fbp'),
+        fbc: buildFbc(),
+        user_agent: navigator.userAgent
+      });
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon('/.netlify/functions/capi-lead',
+          new Blob([payload], { type: 'application/json' }));
+      } else {
+        fetch('/.netlify/functions/capi-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: payload,
+          keepalive: true
+        }).catch(function(){});
+      }
+    } catch(err){ /* silencioso */ }
+
+    // (c) Atrasa a navegação ~150ms para dar tempo do beacon partir
+    setTimeout(function(){ window.open(url, '_blank', 'noopener'); }, 150);
+  }, { passive: false });
 
 
   // 4) VSL · injetada no DOM só quando VSL_ATIVA = true
