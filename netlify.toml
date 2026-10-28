@@ -22,6 +22,12 @@
   status = 301
   force = true
 
+[[redirects]]
+  from = "/decants-completa.html"
+  to = "/decants-completa"
+  status = 301
+  force = true
+
 # Cache estendido para assets versionáveis
 [[headers]]
   for = "/assets/css/*"
