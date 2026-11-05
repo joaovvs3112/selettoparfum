@@ -2,7 +2,9 @@
    Netlify Function · Meta Conversions API (CAPI)
    -----------------------------------------------------------
    Recebe POST do browser quando alguém clica em algum CTA de
-   /decants e envia um evento 'Lead' server-side para o Meta.
+   /decants e envia um evento 'Contact' server-side para o Meta.
+   (Nome do arquivo mantido como "capi-lead" por compatibilidade
+   com o endpoint já publicado · o event_name é que importa.)
 
    Deduplicação: usa o mesmo event_id gerado no browser (que
    também foi passado para fbq). Meta deduplica automaticamente
@@ -53,7 +55,7 @@ exports.handler = async function (event) {
   // Payload no formato esperado pelo Graph API v18.0
   const payload = {
     data: [{
-      event_name: 'Lead',
+      event_name: 'Contact',
       event_time: Math.floor(Date.now() / 1000),
       event_id: body.event_id || null,       // deduplicação com Pixel browser
       event_source_url: sourceUrl,
